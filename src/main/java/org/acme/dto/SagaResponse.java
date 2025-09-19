@@ -1,7 +1,10 @@
 package org.acme.dto;
 
-import org.acme.model.Colecao;
+import java.util.List;
+
 import org.acme.model.Saga;
+
+import io.quarkus.hibernate.orm.panache.PanacheQuery;
 
 public record SagaResponse(
     Long id,
@@ -13,5 +16,12 @@ public record SagaResponse(
             saga.getId(),
             saga.getNomeSaga());
     }
+      public static List<SagaResponse> valueOf1(PanacheQuery<Saga> saga) {
+        return saga.stream()
+        .map(e -> new SagaResponse(
+            e.getId(),
+            e.getNomeSaga()))
+        .toList();
+    }  
     
 }

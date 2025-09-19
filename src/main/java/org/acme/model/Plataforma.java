@@ -6,7 +6,7 @@ import jakarta.persistence.Entity;
 @Entity
 public class Plataforma extends DefaultEntity {
     
-    @Column(length = 10,nullable = false)
+    @Column(length = 60,nullable = false)
     private String nomePlataforma;
 
     public String getNomePlataforma() {

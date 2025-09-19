@@ -1,10 +1,13 @@
 package org.acme.service;
 
+import java.util.List;
+
 import org.acme.dto.SagaResponse;
 import org.acme.dto.Sagadto;
 import org.acme.model.Saga;
 import org.acme.repository.Sagarepository;
 
+import io.quarkus.hibernate.orm.panache.PanacheQuery;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 @ApplicationScoped
@@ -44,5 +47,18 @@ public class Sagaimpl implements Sagaservice {
         Saga achado = repository.acharPorNome(nome);
         return SagaResponse.valueOf(achado);
     }
+
+    @Override
+    public List<SagaResponse> procura_todos(Integer page, Integer pageSize) {
+          PanacheQuery<Saga> query = null;
+        if (page == null || pageSize == null)
+            query = repository.findAll();
+        else
+            query = repository.findAll().page(page, pageSize);
+
+        return SagaResponse.valueOf1( query);
+    }
+
+    }
     
-}
+

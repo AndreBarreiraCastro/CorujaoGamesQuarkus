@@ -1,8 +1,10 @@
 package org.acme.dto;
 
-import org.acme.model.Colecao;
+import java.util.List;
+
 import org.acme.model.Plataforma;
-import org.acme.model.Saga;
+
+import io.quarkus.hibernate.orm.panache.PanacheQuery;
 
 public record PlataformaResponse(
     Long id,
@@ -14,5 +16,12 @@ public record PlataformaResponse(
             plataforma.getId(),
             plataforma.getNomePlataforma());
     }
+      public static List<PlataformaResponse> valueOf1(PanacheQuery<Plataforma> plataforma) {
+        return plataforma.stream()
+        .map(e -> new PlataformaResponse(
+            e.getId(),
+            e.getNomePlataforma()))
+        .toList();
+    }  
     
 }

@@ -1,5 +1,8 @@
 package org.acme.resouce;
 
+import java.util.List;
+
+import org.acme.dto.ColecaoResponse;
 import org.acme.dto.PlataformaResponse;
 import org.acme.dto.Plataformadto;
 import org.acme.service.Plataformaservice;
@@ -8,12 +11,14 @@ import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
+import jakarta.ws.rs.DefaultValue;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.QueryParam;
 import jakarta.ws.rs.core.MediaType;
 
 @Path("plataforma")
@@ -58,4 +63,9 @@ Plataformaservice service;
     }
 
 
+    @GET
+    public List<PlataformaResponse> procuratodos(@QueryParam("page") @DefaultValue("0") int page,
+                                    @QueryParam("page_size") @DefaultValue("100") int pageSize) { 
+        return service.procura_todos(page, pageSize);
+    }
 }

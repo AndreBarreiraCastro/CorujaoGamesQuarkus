@@ -1,10 +1,13 @@
 package org.acme.service;
 
+import java.util.List;
+
 import org.acme.dto.ColecaoResponse;
 import org.acme.dto.Colecaodto;
 import org.acme.model.Colecao;
 import org.acme.repository.Colecaorepository;
 
+import io.quarkus.hibernate.orm.panache.PanacheQuery;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 @ApplicationScoped
@@ -43,6 +46,18 @@ public class Colecaoimpl implements Colecaoservice {
     public ColecaoResponse procura_nome(String nome) {
        Colecao achado = repository.acharPorNome(nome);
        return ColecaoResponse.valueOf(achado);
+    }
+
+    @Override
+    public List<ColecaoResponse> procura_todos(Integer page, Integer pageSize) {
+        
+          PanacheQuery<Colecao> query = null;
+        if (page == null || pageSize == null)
+            query = repository.findAll();
+        else
+            query = repository.findAll().page(page, pageSize);
+
+        return ColecaoResponse.valueOf1( query);
     }
     
 }
