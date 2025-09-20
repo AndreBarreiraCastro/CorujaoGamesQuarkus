@@ -2,7 +2,6 @@ package org.acme.resouce;
 
 import java.util.List;
 
-import org.acme.dto.ColecaoResponse;
 import org.acme.dto.PlataformaResponse;
 import org.acme.dto.Plataformadto;
 import org.acme.service.Plataformaservice;
@@ -21,7 +20,7 @@ import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.QueryParam;
 import jakarta.ws.rs.core.MediaType;
 
-@Path("plataforma")
+@Path("Plataforma")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class Plataformaresource {
@@ -51,7 +50,7 @@ Plataformaservice service;
     }
 
     @GET
-    @Path("/{id}")
+    @Path("id/{id}")
     public PlataformaResponse procuraid(@PathParam("id") Long id){
         return service.procura_id(id);
     }
