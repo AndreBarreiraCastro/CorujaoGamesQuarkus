@@ -7,9 +7,9 @@ public  class Sagadto {
       @NotNull(message = "O nome deve ser informado (back).")
     private  String nomeSaga;
 
-      public String getNomeSaga() {
-        return nomeSaga;
-      }
+    public String getNomeSaga() {
+      return nomeSaga;
+    }
 
 
     
