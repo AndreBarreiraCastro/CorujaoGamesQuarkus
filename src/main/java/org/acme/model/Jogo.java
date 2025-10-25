@@ -1,40 +1,46 @@
 package org.acme.model;
 
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 
 @Entity
 public class Jogo extends DefaultEntity {
-    
-    @Column(length = 60,nullable = false)
+
+    @Column(length = 60, nullable = false)
     private String titulo;
-    
-    @Column(length = 60,nullable = false)
+
+    @Column(length = 60, nullable = false)
     private String genero;
-    
-    @Column(length = 60,nullable = false)
+
+    @Column(length = 60, nullable = false)
     private Double precoUnit;
-    
-    
-    @ManyToMany()
-    @Column(length = 60,nullable = false)
-    private Saga jogoSaga;
-    
-    @ManyToOne()
-    @Column(length = 60,nullable = false)
+
+    @ManyToMany
+    @JoinTable(name = "Jogo_saga", // nome da tabela intermediária
+            joinColumns = @JoinColumn(name = "Jogo_id"), // FK de Jogo
+            inverseJoinColumns = @JoinColumn(name = "Saga_id") // FK de Saga
+    )
+    private List<Saga> jogoSaga;
+
+    @ManyToOne
+    @JoinColumn(name = "Classificacao_id", nullable = false)
     private Classificacao jogoClassificacao;
-    
-    @OneToOne()
+
+    @OneToOne
+    @JoinColumn(name = "Estoque_id", nullable = false)
     private Estoque jogoEstoque;
-    
-    
-    @ManyToOne()
+
+    @ManyToOne
+    @JoinColumn(name = "Midia_id", nullable = false)
     private Midia jogoMidia;
 
-    
     public String getTitulo() {
         return titulo;
     }
@@ -57,14 +63,6 @@ public class Jogo extends DefaultEntity {
 
     public void setPrecoUnit(Double precoUnit) {
         this.precoUnit = precoUnit;
-    }
-
-    public Saga getJogoSaga() {
-        return jogoSaga;
-    }
-
-    public void setJogoSaga(Saga jogoSaga) {
-        this.jogoSaga = jogoSaga;
     }
 
     public Classificacao getJogoClassificacao() {
@@ -91,5 +89,12 @@ public class Jogo extends DefaultEntity {
         this.jogoMidia = jogoMidia;
     }
 
+    public List<Saga> getJogoSaga() {
+        return jogoSaga;
+    }
+
+    public void setJogoSaga(List<Saga> jogoSaga) {
+        this.jogoSaga = jogoSaga;
+    }
 
 }

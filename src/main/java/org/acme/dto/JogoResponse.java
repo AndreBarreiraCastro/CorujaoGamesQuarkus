@@ -16,7 +16,7 @@ public record JogoResponse(
    String titulo,
    String genero,
  Double valorUnit,
-   Saga jogoSaga,
+   List<Saga> jogoSaga,
    Classificacao jogoClassificacao,
    Estoque jogoEstoque,
    Midia jogoMidia
@@ -33,5 +33,20 @@ public record JogoResponse(
             jogo.getJogoEstoque(),
             jogo.getJogoMidia());
     }
+
+          public static List<JogoResponse> valueOf1(PanacheQuery<Jogo> jogo) {
+        return jogo.stream()
+        .map(e -> new JogoResponse(
+            e.getId(),
+            e.getTitulo(),
+            e.getGenero(),
+            e.getPrecoUnit(),
+            e.getJogoSaga(),
+            e.getJogoClassificacao(),
+            e.getJogoEstoque(),
+            e.getJogoMidia()))
+        .toList();
+    }  
+
     
 }

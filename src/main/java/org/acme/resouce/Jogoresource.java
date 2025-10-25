@@ -2,10 +2,9 @@ package org.acme.resouce;
 
 import java.util.List;
 
-import org.acme.dto.ColecaoResponse;
-import org.acme.dto.SagaResponse;
-import org.acme.dto.Sagadto;
-import org.acme.service.Sagaservice;
+import org.acme.dto.JogoResponse;
+import org.acme.dto.Jogodto;
+import org.acme.service.Jogoservice;
 
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
@@ -21,26 +20,27 @@ import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.QueryParam;
 import jakarta.ws.rs.core.MediaType;
 
-@Path("Saga")
+@Path("Jogo")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-public class Sagaresource {
 
+public class Jogoresource {
+    
     @Inject
-    Sagaservice service;
+    Jogoservice service;
 
-    @POST
+/*     @POST
     @Transactional
-    public SagaResponse inserir(Sagadto saga) {
-        return service.inserir(saga);
+    public JogoResponse inserir(Jogodto jogo) {
+        return service.inserir(jogo);
     }
 
     @PUT
     @Transactional
     @Path("/{id}")
-    public void atualizar(@PathParam("id") Long id, Sagadto saga) {
+    public void atualizar(@PathParam("id") Long id, Jogodto jogo) {
 
-        service.atualizar(id, saga);
+        service.atualizar(id, jogo);
     }
 
     @DELETE
@@ -52,19 +52,20 @@ public class Sagaresource {
 
     @GET
     @Path("id/{id}")
-    public SagaResponse procuraid(@PathParam("id") Long id) {
+    public JogoResponse procuraid(@PathParam("id") Long id) {
         return service.procura_id(id);
     }
 
     @GET
     @Path("/nome/{nome}")
-    public SagaResponse procuranome(@PathParam("nome") String nome) {
+    public JogoResponse procuranome(@PathParam("nome") String nome) {
         return service.procura_nome(nome);
     }
-
+ */
     @GET
-    public List<SagaResponse> procuratodos(@QueryParam("page") @DefaultValue("0") int page,
+    public List<JogoResponse> procuratodos(@QueryParam("page") @DefaultValue("0") int page,
             @QueryParam("page_size") @DefaultValue("100") int pageSize) {
         return service.procura_todos(page, pageSize);
     }
+
 }

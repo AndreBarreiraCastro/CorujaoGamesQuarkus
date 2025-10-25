@@ -64,3 +64,45 @@ INSERT INTO plataforma (nomePlataforma) VALUES ('Sega Genesis / Mega Drive');
 INSERT INTO plataforma (nomePlataforma) VALUES ('Sega Saturn');
 INSERT INTO plataforma (nomePlataforma) VALUES ('Dreamcast');
 
+-- Jogos
+INSERT INTO jogo (titulo, genero, precoUnit, Classificacao_id, Estoque_id,Midia_id)
+VALUES ('The Legend of Zelda: Breath of the Wild', 'Ação/Aventura', 299.90, 1, 1, 1);
+
+INSERT INTO jogo (titulo, genero, precoUnit, jogoClassificacao_id, jogoEstoque_id, jogoMidia_id)
+VALUES ('Final Fantasy VII Remake', 'RPG', 249.90, 1, 2, 1);
+
+INSERT INTO jogo (titulo, genero, precoUnit, jogoClassificacao_id, jogoEstoque_id, jogoMidia_id)
+VALUES ('Resident Evil 4 Remake', 'Terror/Ação', 279.90, 2, 3, 1);
+
+INSERT INTO jogo (titulo, genero, precoUnit, jogoClassificacao_id, jogoEstoque_id, jogoMidia_id)
+VALUES ('God of War Ragnarök', 'Ação/Aventura', 349.90, 2, 4, 1);
+
+INSERT INTO jogo (titulo, genero, precoUnit, jogoClassificacao_id, jogoEstoque_id, jogoMidia_id)
+VALUES ('Halo Infinite', 'Tiro em Primeira Pessoa', 299.90, 2, 5, 1);
+
+INSERT INTO jogo (titulo, genero, precoUnit, jogoClassificacao_id, jogoEstoque_id, jogoMidia_id)
+VALUES ('Assassin''s Creed Valhalla', 'Ação/RPG', 279.90, 2, 6, 1);
+
+INSERT INTO jogo (titulo, genero, precoUnit, jogoClassificacao_id, jogoEstoque_id, jogoMidia_id)
+VALUES ('Dark Souls III', 'RPG/Ação', 199.90, 2, 7, 1);
+
+INSERT INTO jogo (titulo, genero, precoUnit, jogoClassificacao_id, jogoEstoque_id, jogoMidia_id)
+VALUES ('Diablo IV', 'RPG/Ação', 299.90, 2, 8, 1);
+
+INSERT INTO jogo (titulo, genero, precoUnit, jogoClassificacao_id, jogoEstoque_id, jogoMidia_id)
+VALUES ('Street Fighter 6', 'Luta', 259.90, 1, 9, 1);
+
+INSERT INTO jogo (titulo, genero, precoUnit, jogoClassificacao_id, jogoEstoque_id, jogoMidia_id)
+VALUES ('Pokémon Scarlet', 'RPG/Aventura', 299.90, 1, 10, 1);
+
+-- Relações Jogo x Saga (jogo_saga)
+INSERT INTO jogo_saga (jogo_id, saga_id) VALUES (1, 1);  -- Zelda
+INSERT INTO jogo_saga (jogo_id, saga_id) VALUES (2, 2);  -- Final Fantasy
+INSERT INTO jogo_saga (jogo_id, saga_id) VALUES (3, 3);  -- Resident Evil
+INSERT INTO jogo_saga (jogo_id, saga_id) VALUES (4, 4);  -- God of War
+INSERT INTO jogo_saga (jogo_id, saga_id) VALUES (5, 5);  -- Halo
+INSERT INTO jogo_saga (jogo_id, saga_id) VALUES (6, 6);  -- Assassin's Creed
+INSERT INTO jogo_saga (jogo_id, saga_id) VALUES (7, 9);  -- Dark Souls
+INSERT INTO jogo_saga (jogo_id, saga_id) VALUES (8, 11); -- Diablo
+INSERT INTO jogo_saga (jogo_id, saga_id) VALUES (9, 12); -- Street Fighter
+INSERT INTO jogo_saga (jogo_id, saga_id) VALUES (10, 14);-- Pokémon
