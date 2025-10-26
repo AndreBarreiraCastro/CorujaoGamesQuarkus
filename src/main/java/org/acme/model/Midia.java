@@ -1,26 +1,37 @@
 package org.acme.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-public abstract class Midia {
+public abstract class Midia extends DefaultEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(length = 60, nullable = false)
+    private String desenvolvedora;
 
-    public Long getId() {
-        return id;
+    @Column(length = 60, nullable = false)
+    private String modoJogo;
+
+
+    public String getDesenvolvedora() {
+        return desenvolvedora;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setDesenvolvedora(String desenvolvedora) {
+        this.desenvolvedora = desenvolvedora;
     }
+
+    public String getModoJogo() {
+        return modoJogo;
+    }
+
+    public void setModoJogo(String modoJogo) {
+        this.modoJogo = modoJogo;
+    }
+
+    
 
 }

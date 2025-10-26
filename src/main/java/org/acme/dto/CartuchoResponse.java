@@ -1,4 +1,4 @@
-package org.acme.dto;
+/* package org.acme.dto;
 
 import org.acme.model.Cartucho;
 
@@ -16,3 +16,4 @@ public record CartuchoResponse(
     }
     
 }
+ */

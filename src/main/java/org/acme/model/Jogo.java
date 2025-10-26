@@ -30,16 +30,24 @@ public class Jogo extends DefaultEntity {
     private List<Saga> jogoSaga;
 
     @ManyToOne
-    @JoinColumn(name = "Classificacao_id", nullable = false)
+    @JoinColumn(name = "classificacao_id", nullable = false)
     private Classificacao jogoClassificacao;
 
     @OneToOne
-    @JoinColumn(name = "Estoque_id", nullable = false)
+    @JoinColumn(name = "estoque_id", nullable = false)
     private Estoque jogoEstoque;
 
     @ManyToOne
-    @JoinColumn(name = "Midia_id", nullable = false)
+    @JoinColumn(name = "midia_id", nullable = false)
     private Midia jogoMidia;
+
+    public Midia getJogoMidia() {
+        return jogoMidia;
+    }
+
+    public void setJogoMidia(Midia jogoMidia) {
+        this.jogoMidia = jogoMidia;
+    }
 
     public String getTitulo() {
         return titulo;
@@ -79,14 +87,6 @@ public class Jogo extends DefaultEntity {
 
     public void setJogoEstoque(Estoque jogoEstoque) {
         this.jogoEstoque = jogoEstoque;
-    }
-
-    public Midia getJogoMidia() {
-        return jogoMidia;
-    }
-
-    public void setJogoMidia(Midia jogoMidia) {
-        this.jogoMidia = jogoMidia;
     }
 
     public List<Saga> getJogoSaga() {

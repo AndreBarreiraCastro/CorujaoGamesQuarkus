@@ -1,4 +1,4 @@
-package org.acme.dto;
+/* package org.acme.dto;
 
 import org.acme.model.Disco;
 
@@ -15,3 +15,4 @@ public record DiscoResponse(
             disco.getModoJogo());
     }
 }
+ */

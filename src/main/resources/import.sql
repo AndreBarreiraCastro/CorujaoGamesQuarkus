@@ -63,9 +63,57 @@ INSERT INTO plataforma (nomePlataforma) VALUES ('Sega Master System');
 INSERT INTO plataforma (nomePlataforma) VALUES ('Sega Genesis / Mega Drive');
 INSERT INTO plataforma (nomePlataforma) VALUES ('Sega Saturn');
 INSERT INTO plataforma (nomePlataforma) VALUES ('Dreamcast');
+INSERT INTO plataforma (nomePlataforma) VALUES ('Dreamcast');
 
--- Jogos
-INSERT INTO jogo (titulo, genero, precoUnit, Classificacao_id, Estoque_id,Midia_id)
+-- =========================
+-- Populando a tabela Midia
+-- =========================
+
+-- Midias genéricas (os IDs serão herdados pelas subclasses)
+INSERT INTO midia ( desenvolvedora, modoJogo) VALUES ( 'Nintendo', 'Single Player');
+INSERT INTO midia ( desenvolvedora, modoJogo) VALUES ( 'Nintendo', 'Multiplayer');
+INSERT INTO midia ( desenvolvedora, modoJogo) VALUES ('Sony', 'Single Player');
+
+-- =========================
+-- Populando a tabela Disco (subclasse de Midia)
+-- =========================
+INSERT INTO disco (id) VALUES (3); -- FK para midia.id = 3
+
+-- =========================
+-- Populando a tabela Cartucho (subclasse de Midia)
+-- =========================
+INSERT INTO cartucho (id) VALUES (1); -- FK para midia.id = 1
+INSERT INTO cartucho (id) VALUES (2); -- FK para midia.id = 2
+
+/* -- População inicial da tabela DISCO
+INSERT INTO disco (desenvolvedoraDisco, modoJogo)
+VALUES 
+('Nintendo', 'Single Player'),
+('Capcom', 'Single Player / Multiplayer'),
+('FromSoftware', 'Single Player'),
+('CD Projekt Red', 'Single Player'),
+('Ubisoft', 'Multiplayer'),
+('Square Enix', 'Single Player'),
+('Rockstar Games', 'Single Player / Online'),
+('Electronic Arts', 'Multiplayer'),
+('Bethesda Softworks', 'Single Player'),
+('Bandai Namco', 'Single Player / Co-op');
+-- População inicial da tabela CARTUCHO
+INSERT INTO cartucho (desenvolvedoraCartucho, modoJogo)
+VALUES 
+('Nintendo', 'Single Player'),
+('Game Freak', 'Single Player / Multiplayer'),
+('Capcom', 'Multiplayer'),
+('Bandai Namco', 'Single Player / Co-op'),
+('Konami', 'Single Player'),
+('Square Enix', 'Single Player'),
+('Atlus', 'Single Player'),
+('Sega', 'Multiplayer'),
+('HAL Laboratory', 'Single Player'),
+('Rare', 'Single Player / Multiplayer');
+ */
+/* -- Jogos
+INSERT INTO jogo (titulo, genero, precoUnit, classificacao_id, estoque_id,midia_id)
 VALUES ('The Legend of Zelda: Breath of the Wild', 'Ação/Aventura', 299.90, 1, 1, 1);
 
 INSERT INTO jogo (titulo, genero, precoUnit, jogoClassificacao_id, jogoEstoque_id, jogoMidia_id)
@@ -106,3 +154,4 @@ INSERT INTO jogo_saga (jogo_id, saga_id) VALUES (7, 9);  -- Dark Souls
 INSERT INTO jogo_saga (jogo_id, saga_id) VALUES (8, 11); -- Diablo
 INSERT INTO jogo_saga (jogo_id, saga_id) VALUES (9, 12); -- Street Fighter
 INSERT INTO jogo_saga (jogo_id, saga_id) VALUES (10, 14);-- Pokémon
+ */

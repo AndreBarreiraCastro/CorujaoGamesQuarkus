@@ -5,11 +5,9 @@ import java.util.List;
 import org.acme.model.Classificacao;
 import org.acme.model.Estoque;
 import org.acme.model.Jogo;
-import org.acme.model.Midia;
 import org.acme.model.Saga;
 
 import io.quarkus.hibernate.orm.panache.PanacheQuery;
-import jakarta.validation.constraints.NotNull;
 
 public record JogoResponse(
     Long id,
@@ -18,8 +16,7 @@ public record JogoResponse(
  Double valorUnit,
    List<Saga> jogoSaga,
    Classificacao jogoClassificacao,
-   Estoque jogoEstoque,
-   Midia jogoMidia
+   Estoque jogoEstoque
 ) {
 
     public static JogoResponse valueOf(Jogo jogo) {
@@ -30,8 +27,7 @@ public record JogoResponse(
             jogo.getPrecoUnit(),
             jogo.getJogoSaga(),
             jogo.getJogoClassificacao(),
-            jogo.getJogoEstoque(),
-            jogo.getJogoMidia());
+            jogo.getJogoEstoque());
     }
 
           public static List<JogoResponse> valueOf1(PanacheQuery<Jogo> jogo) {
@@ -43,8 +39,7 @@ public record JogoResponse(
             e.getPrecoUnit(),
             e.getJogoSaga(),
             e.getJogoClassificacao(),
-            e.getJogoEstoque(),
-            e.getJogoMidia()))
+            e.getJogoEstoque()))
         .toList();
     }  
 
