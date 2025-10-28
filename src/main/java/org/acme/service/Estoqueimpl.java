@@ -43,23 +43,17 @@ public class Estoqueimpl implements Estoqueservice {
         Estoque achado = repository.findById(id);
         return EstoqueResponse.valueOf(achado);
     }
-    /*
-     * @Override
-     * public EstoqueResponse procura_nome(String nome) {
-     * Estoque achado = repository.acharPorNome(nome);
-     * return EstoqueResponse.valueOf(achado);
-     * }
-     * 
-     * @Override
-     * public List<EstoqueResponse> procura_todos(Integer page, Integer pageSize) {
-     * PanacheQuery<Estoque> query = null;
-     * if (page == null || pageSize == null)
-     * query = repository.findAll();
-     * else
-     * query = repository.findAll().page(page, pageSize);
-     * 
-     * return EstoqueResponse.valueOf1( query);
-     * }
-     * 
-     */
+     
+     @Override
+     public List<EstoqueResponse> procura_todos(Integer page, Integer pageSize) {
+     PanacheQuery<Estoque> query = null;
+     if (page == null || pageSize == null)
+     query = repository.findAll();
+     else
+     query = repository.findAll().page(page, pageSize);
+     
+     return EstoqueResponse.valueOf1( query);
+     }
+     
+    
 }

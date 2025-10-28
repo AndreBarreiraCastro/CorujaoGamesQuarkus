@@ -65,6 +65,27 @@ INSERT INTO plataforma (nomePlataforma) VALUES ('Sega Saturn');
 INSERT INTO plataforma (nomePlataforma) VALUES ('Dreamcast');
 INSERT INTO plataforma (nomePlataforma) VALUES ('Dreamcast');
 
+INSERT INTO classificacao (idademinima, descricao) VALUES (0, 'Livre para todos os públicos');
+INSERT INTO classificacao (idademinima, descricao) VALUES (10, 'Não recomendado para menores de 10 anos');
+INSERT INTO classificacao (idademinima, descricao) VALUES (12, 'Não recomendado para menores de 12 anos');
+INSERT INTO classificacao (idademinima, descricao) VALUES (14, 'Não recomendado para menores de 14 anos');
+INSERT INTO classificacao (idademinima, descricao) VALUES (16, 'Não recomendado para menores de 16 anos');
+INSERT INTO classificacao (idademinima, descricao) VALUES (18, 'Não recomendado para menores de 18 anos');
+
+
+INSERT INTO estoque (quantidade) VALUES (5);
+INSERT INTO estoque (quantidade) VALUES (10);
+INSERT INTO estoque (quantidade) VALUES (20);
+INSERT INTO estoque (quantidade) VALUES (50);
+INSERT INTO estoque (quantidade) VALUES (100);
+INSERT INTO estoque (quantidade) VALUES (200);
+INSERT INTO estoque (quantidade) VALUES (500);
+INSERT INTO estoque (quantidade) VALUES (500);
+INSERT INTO estoque (quantidade) VALUES (500);
+INSERT INTO estoque (quantidade) VALUES (500);
+INSERT INTO estoque (quantidade) VALUES (500);
+INSERT INTO estoque (quantidade) VALUES (500);
+
 -- =========================
 -- Populando a tabela Midia
 -- =========================
@@ -84,74 +105,3 @@ INSERT INTO disco (id) VALUES (3); -- FK para midia.id = 3
 -- =========================
 INSERT INTO cartucho (id) VALUES (1); -- FK para midia.id = 1
 INSERT INTO cartucho (id) VALUES (2); -- FK para midia.id = 2
-
-/* -- População inicial da tabela DISCO
-INSERT INTO disco (desenvolvedoraDisco, modoJogo)
-VALUES 
-('Nintendo', 'Single Player'),
-('Capcom', 'Single Player / Multiplayer'),
-('FromSoftware', 'Single Player'),
-('CD Projekt Red', 'Single Player'),
-('Ubisoft', 'Multiplayer'),
-('Square Enix', 'Single Player'),
-('Rockstar Games', 'Single Player / Online'),
-('Electronic Arts', 'Multiplayer'),
-('Bethesda Softworks', 'Single Player'),
-('Bandai Namco', 'Single Player / Co-op');
--- População inicial da tabela CARTUCHO
-INSERT INTO cartucho (desenvolvedoraCartucho, modoJogo)
-VALUES 
-('Nintendo', 'Single Player'),
-('Game Freak', 'Single Player / Multiplayer'),
-('Capcom', 'Multiplayer'),
-('Bandai Namco', 'Single Player / Co-op'),
-('Konami', 'Single Player'),
-('Square Enix', 'Single Player'),
-('Atlus', 'Single Player'),
-('Sega', 'Multiplayer'),
-('HAL Laboratory', 'Single Player'),
-('Rare', 'Single Player / Multiplayer');
- */
-/* -- Jogos
-INSERT INTO jogo (titulo, genero, precoUnit, classificacao_id, estoque_id,midia_id)
-VALUES ('The Legend of Zelda: Breath of the Wild', 'Ação/Aventura', 299.90, 1, 1, 1);
-
-INSERT INTO jogo (titulo, genero, precoUnit, jogoClassificacao_id, jogoEstoque_id, jogoMidia_id)
-VALUES ('Final Fantasy VII Remake', 'RPG', 249.90, 1, 2, 1);
-
-INSERT INTO jogo (titulo, genero, precoUnit, jogoClassificacao_id, jogoEstoque_id, jogoMidia_id)
-VALUES ('Resident Evil 4 Remake', 'Terror/Ação', 279.90, 2, 3, 1);
-
-INSERT INTO jogo (titulo, genero, precoUnit, jogoClassificacao_id, jogoEstoque_id, jogoMidia_id)
-VALUES ('God of War Ragnarök', 'Ação/Aventura', 349.90, 2, 4, 1);
-
-INSERT INTO jogo (titulo, genero, precoUnit, jogoClassificacao_id, jogoEstoque_id, jogoMidia_id)
-VALUES ('Halo Infinite', 'Tiro em Primeira Pessoa', 299.90, 2, 5, 1);
-
-INSERT INTO jogo (titulo, genero, precoUnit, jogoClassificacao_id, jogoEstoque_id, jogoMidia_id)
-VALUES ('Assassin''s Creed Valhalla', 'Ação/RPG', 279.90, 2, 6, 1);
-
-INSERT INTO jogo (titulo, genero, precoUnit, jogoClassificacao_id, jogoEstoque_id, jogoMidia_id)
-VALUES ('Dark Souls III', 'RPG/Ação', 199.90, 2, 7, 1);
-
-INSERT INTO jogo (titulo, genero, precoUnit, jogoClassificacao_id, jogoEstoque_id, jogoMidia_id)
-VALUES ('Diablo IV', 'RPG/Ação', 299.90, 2, 8, 1);
-
-INSERT INTO jogo (titulo, genero, precoUnit, jogoClassificacao_id, jogoEstoque_id, jogoMidia_id)
-VALUES ('Street Fighter 6', 'Luta', 259.90, 1, 9, 1);
-
-INSERT INTO jogo (titulo, genero, precoUnit, jogoClassificacao_id, jogoEstoque_id, jogoMidia_id)
-VALUES ('Pokémon Scarlet', 'RPG/Aventura', 299.90, 1, 10, 1);
-
--- Relações Jogo x Saga (jogo_saga)
-INSERT INTO jogo_saga (jogo_id, saga_id) VALUES (1, 1);  -- Zelda
-INSERT INTO jogo_saga (jogo_id, saga_id) VALUES (2, 2);  -- Final Fantasy
-INSERT INTO jogo_saga (jogo_id, saga_id) VALUES (3, 3);  -- Resident Evil
-INSERT INTO jogo_saga (jogo_id, saga_id) VALUES (4, 4);  -- God of War
-INSERT INTO jogo_saga (jogo_id, saga_id) VALUES (5, 5);  -- Halo
-INSERT INTO jogo_saga (jogo_id, saga_id) VALUES (6, 6);  -- Assassin's Creed
-INSERT INTO jogo_saga (jogo_id, saga_id) VALUES (7, 9);  -- Dark Souls
-INSERT INTO jogo_saga (jogo_id, saga_id) VALUES (8, 11); -- Diablo
-INSERT INTO jogo_saga (jogo_id, saga_id) VALUES (9, 12); -- Street Fighter
-INSERT INTO jogo_saga (jogo_id, saga_id) VALUES (10, 14);-- Pokémon
- */

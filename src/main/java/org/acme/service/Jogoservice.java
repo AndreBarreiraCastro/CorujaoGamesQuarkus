@@ -5,7 +5,7 @@ import java.util.List;
 import org.acme.dto.JogoResponse;
 import org.acme.dto.Jogodto;
 
-public interface Jogoservice {/* 
+public interface Jogoservice {
     JogoResponse inserir(Jogodto jogo);
 
     void atualizar(Long id, Jogodto jogo);
@@ -14,7 +14,7 @@ public interface Jogoservice {/*
 
     JogoResponse procura_id(Long id);
 
-    JogoResponse procura_nome(String nome);
+    /* JogoResponse procura_nome(String nome);
  */
     List<JogoResponse> procura_todos(Integer page, Integer pageSize);
 }

@@ -1,8 +1,6 @@
 package org.acme.dto;
 
-import org.acme.model.Classificacao;
-import org.acme.model.Estoque;
-import org.acme.model.Saga;
+import java.util.List;
 
 import jakarta.validation.constraints.NotNull;
 
@@ -18,38 +16,51 @@ public class Jogodto {
   private Double valorUnit;
   
   @NotNull(message = "A  Saga deve ser informado.")
-  private Saga jogoSaga;
+  private Long jogoSaga;
   
   @NotNull(message = "A  Classifição não foi escolhida.")
-  private Classificacao jogoClassificacao;
+  private long  jogoClassificacao;
   
   @NotNull(message = "O Estoque não foi escolhido.")
-  private Estoque jogoEstoque;
+  private long  jogoEstoque;
+ 
+  @NotNull(message = "O Estoque não foi escolhido.")
+  private Long jogoMidia;
+ 
+  @NotNull(message = "O Estoque não foi escolhido.")
+  private List<Long> jogoPlataforma;
 
-    public String getTitulo() {
-        return titulo;
-    }
+  public String getTitulo() {
+    return titulo;
+  }
 
-    public String getGenero() {
-        return genero;
-    }
+  public String getGenero() {
+    return genero;
+  }
 
-    public Double getValorUnit() {
-        return valorUnit;
-    }
+  public Double getValorUnit() {
+    return valorUnit;
+  }
 
-    public Saga getJogoSaga() {
-        return jogoSaga;
-    }
+  public Long getJogoSaga() {
+    return jogoSaga;
+  }
 
-    public Classificacao getJogoClassificacao() {
-        return jogoClassificacao;
-    }
+  public long getJogoClassificacao() {
+    return jogoClassificacao;
+  }
 
-    public Estoque getJogoEstoque() {
-        return jogoEstoque;
+  public long getJogoEstoque() {
+    return jogoEstoque;
+  }
+
+  public Long getJogoMidia() {
+    return jogoMidia;
+  }
+
+    public List<Long> getJogoPlataforma() {
+        return jogoPlataforma;
     }
-  
 
   
 }

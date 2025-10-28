@@ -1,5 +1,7 @@
 package org.acme.service;
 
+import java.util.List;
+
 import org.acme.dto.EstoqueResponse;
 import org.acme.dto.Estoquedto;
 
@@ -11,8 +13,6 @@ public interface Estoqueservice {
     void deletar(Long id);
 
     EstoqueResponse procura_id(Long id);
-    /*
-     * EstoqueResponse procura_nome(String nome);
-     * List<EstoqueResponse> procura_todos(Integer page, Integer pageSize);
-     */
+
+    List<EstoqueResponse> procura_todos(Integer page, Integer pageSize);
 }

@@ -22,25 +22,28 @@ public class Jogo extends DefaultEntity {
     @Column(length = 60, nullable = false)
     private Double precoUnit;
 
-    @ManyToMany
-    @JoinTable(name = "Jogo_saga", // nome da tabela intermediária
-            joinColumns = @JoinColumn(name = "Jogo_id"), // FK de Jogo
-            inverseJoinColumns = @JoinColumn(name = "Saga_id") // FK de Saga
-    )
-    private List<Saga> jogoSaga;
+    @ManyToOne
+    @JoinColumn(name = "Jogo_saga")
+    private Saga jogoSaga;
 
     @ManyToOne
-    @JoinColumn(name = "classificacao_id", nullable = false)
+    @JoinColumn(name = "jogoClassificacao_id", nullable = false)
     private Classificacao jogoClassificacao;
 
     @OneToOne
-    @JoinColumn(name = "estoque_id", nullable = false)
+    @JoinColumn(name = "jogoEstoque_id", nullable = false)
     private Estoque jogoEstoque;
 
     @ManyToOne
-    @JoinColumn(name = "midia_id", nullable = false)
+    @JoinColumn(name = "jogoMidia_id", nullable = false)
     private Midia jogoMidia;
+    
+    @ManyToMany
+    @JoinTable(name="jogoPlataforma_id")
+    private List<Plataforma> jogoPlataforma;
 
+
+    
     public Midia getJogoMidia() {
         return jogoMidia;
     }
@@ -89,12 +92,22 @@ public class Jogo extends DefaultEntity {
         this.jogoEstoque = jogoEstoque;
     }
 
-    public List<Saga> getJogoSaga() {
+    public Saga getJogoSaga() {
         return jogoSaga;
     }
 
-    public void setJogoSaga(List<Saga> jogoSaga) {
+    public void setJogoSaga(Saga jogoSaga) {
         this.jogoSaga = jogoSaga;
     }
+
+    public List<Plataforma> getJogoPlataforma() {
+        return jogoPlataforma;
+    }
+
+    public void setJogoPlataforma(List<Plataforma> jogoPlataforma) {
+        this.jogoPlataforma = jogoPlataforma;
+    }
+
+   
 
 }
