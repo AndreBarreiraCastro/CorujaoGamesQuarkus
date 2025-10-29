@@ -7,14 +7,16 @@ public class Classificacaodto {
 
   //@NotNull(message = "A idade nao pode ser nulo")
   @Max(value=18)
-  private Integer idademinima;
+  private Integer classificacao;
 
   @NotNull()
   private String descricao;
 
-  public Integer getidademinima() {
-    return idademinima;
+  
+  public Integer getClassificacao() {
+    return classificacao;
   }
+
 
   public String getdescricao() {
     return descricao;

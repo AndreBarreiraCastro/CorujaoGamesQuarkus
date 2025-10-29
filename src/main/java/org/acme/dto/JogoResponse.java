@@ -5,6 +5,7 @@ import java.util.List;
 import org.acme.model.Classificacao;
 import org.acme.model.Estoque;
 import org.acme.model.Jogo;
+import org.acme.model.Midia;
 import org.acme.model.Plataforma;
 import org.acme.model.Saga;
 
@@ -15,6 +16,7 @@ public record JogoResponse(
         String titulo,
         String genero,
         Double valorUnit,
+        Midia midia,
         Saga jogoSaga,
         Classificacao jogoClassificacao,
         Estoque jogoEstoque,
@@ -26,6 +28,7 @@ public record JogoResponse(
                 jogo.getTitulo(),
                 jogo.getGenero(),
                 jogo.getPrecoUnit(),
+                jogo.getJogoMidia(),
                 jogo.getJogoSaga(),
                 jogo.getJogoClassificacao(),
                 jogo.getJogoEstoque(),
@@ -39,6 +42,7 @@ public record JogoResponse(
                         e.getTitulo(),
                         e.getGenero(),
                         e.getPrecoUnit(),
+                        e.getJogoMidia(),
                         e.getJogoSaga(),
                         e.getJogoClassificacao(),
                         e.getJogoEstoque(),

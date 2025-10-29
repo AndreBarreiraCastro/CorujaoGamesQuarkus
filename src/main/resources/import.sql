@@ -65,12 +65,12 @@ INSERT INTO plataforma (nomePlataforma) VALUES ('Sega Saturn');
 INSERT INTO plataforma (nomePlataforma) VALUES ('Dreamcast');
 INSERT INTO plataforma (nomePlataforma) VALUES ('Dreamcast');
 
-INSERT INTO classificacao (idademinima, descricao) VALUES (0, 'Livre para todos os públicos');
-INSERT INTO classificacao (idademinima, descricao) VALUES (10, 'Não recomendado para menores de 10 anos');
-INSERT INTO classificacao (idademinima, descricao) VALUES (12, 'Não recomendado para menores de 12 anos');
-INSERT INTO classificacao (idademinima, descricao) VALUES (14, 'Não recomendado para menores de 14 anos');
-INSERT INTO classificacao (idademinima, descricao) VALUES (16, 'Não recomendado para menores de 16 anos');
-INSERT INTO classificacao (idademinima, descricao) VALUES (18, 'Não recomendado para menores de 18 anos');
+INSERT INTO classificacao (classificacao, descricao) VALUES (0, 'Livre para todos os públicos');
+INSERT INTO classificacao (classificacao, descricao) VALUES (10, 'Não recomendado para menores de 10 anos');
+INSERT INTO classificacao (classificacao, descricao) VALUES (12, 'Não recomendado para menores de 12 anos');
+INSERT INTO classificacao (classificacao, descricao) VALUES (14, 'Não recomendado para menores de 14 anos');
+INSERT INTO classificacao (classificacao, descricao) VALUES (16, 'Não recomendado para menores de 16 anos');
+INSERT INTO classificacao (classificacao, descricao) VALUES (18, 'Não recomendado para menores de 18 anos');
 
 
 INSERT INTO estoque (quantidade) VALUES (5);
