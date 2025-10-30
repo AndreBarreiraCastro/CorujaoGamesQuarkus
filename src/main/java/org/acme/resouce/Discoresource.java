@@ -19,7 +19,6 @@ import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.QueryParam;
 import jakarta.ws.rs.core.MediaType;
-import jakarta.ws.rs.core.Response;
 
 @Path("/discos")
 @Produces(MediaType.APPLICATION_JSON)
@@ -41,9 +40,8 @@ public class Discoresource {
 
     @POST
     @Transactional
-    public Response create(Discodto dto) {
-        service.inserir(dto);
-        return Response.status(Response.Status.CREATED).build();
+    public DiscoResponse create(Discodto dto) {
+        return service.inserir(dto);
     }
 
      @PUT
