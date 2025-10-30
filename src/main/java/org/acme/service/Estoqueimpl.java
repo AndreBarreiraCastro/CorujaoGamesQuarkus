@@ -20,8 +20,7 @@ public class Estoqueimpl implements Estoqueservice {
     @Override
     public EstoqueResponse inserir(Estoquedto estoque) {
         Estoque novo = new Estoque();
-        novo.setQuantidade(estoque.getEstoque());
-        ;
+        novo.setQuantidade(estoque.getQuantidade());
         repository.persist(novo);
         return EstoqueResponse.valueOf(novo);
     }
@@ -29,7 +28,7 @@ public class Estoqueimpl implements Estoqueservice {
     @Override
     public void atualizar(Long id, Estoquedto estoque) {
         Estoque atualizado = repository.findById(id);
-        atualizado.setQuantidade(estoque.getEstoque());
+        atualizado.setQuantidade(estoque.getQuantidade());
         repository.persist(atualizado);
     }
 

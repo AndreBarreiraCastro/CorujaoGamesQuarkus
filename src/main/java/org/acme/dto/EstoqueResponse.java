@@ -8,7 +8,7 @@ import io.quarkus.hibernate.orm.panache.PanacheQuery;
 
 public record EstoqueResponse(
     Long id,
-    int estoque
+    int quantidade
 ) {
 
     public static EstoqueResponse valueOf(Estoque estoque) {

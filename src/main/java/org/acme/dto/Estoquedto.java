@@ -5,10 +5,10 @@ import jakarta.validation.constraints.NotNull;
 public  class Estoquedto {
 
       @NotNull(message = "O estoque nao pode ser nulo")
-    private  int estoque;
+    private  int quantidade;
 
-      public int getEstoque() {
-        return estoque;
+      public int getQuantidade() {
+        return quantidade;
       }
 
 
