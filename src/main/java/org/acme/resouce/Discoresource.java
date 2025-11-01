@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.acme.dto.DiscoResponse;
 import org.acme.dto.Discodto;
+import org.acme.model.Disco;
 import org.acme.service.Discoservice;
 
 import jakarta.inject.Inject;
@@ -58,16 +59,23 @@ public class Discoresource {
     public void deletar(@PathParam("id") Long id) {
         service.deletar(id);
     }
-
+    
     @GET
     @Path("id/{id}")
     public DiscoResponse procuraid(@PathParam("id") Long id) {
         return service.procura_id(id);
     }
-
+    
     @GET
-    public List<DiscoResponse> procuratodos(@QueryParam("page") @DefaultValue("0") int page,
-            @QueryParam("page_size") @DefaultValue("100") int pageSize) {
+    @Path("procuratodos")
+    public List<Disco> procuratodos(@QueryParam("page") @DefaultValue("0") int page,
+    @QueryParam("pageSize") @DefaultValue("100") int pageSize) {
         return service.procura_todos(page, pageSize);
     }
+    
+        @GET
+        @Path("count")
+        public Long count() {
+            return service.count();
+        }
 }

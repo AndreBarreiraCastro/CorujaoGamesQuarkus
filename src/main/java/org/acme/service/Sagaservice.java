@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.acme.dto.SagaResponse;
 import org.acme.dto.Sagadto;
+import org.acme.model.Saga;
 
 public interface Sagaservice {
     SagaResponse inserir(Sagadto saga);
@@ -16,5 +17,6 @@ public interface Sagaservice {
 
     SagaResponse procura_nome(String nome);
 
-    List<SagaResponse> procura_todos(Integer page, Integer pageSize);
+    List<Saga> procura_todos(Integer page, Integer pageSize);
+    Long count();
 }

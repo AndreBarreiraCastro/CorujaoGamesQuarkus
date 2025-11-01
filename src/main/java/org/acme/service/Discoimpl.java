@@ -47,7 +47,7 @@ public class Discoimpl implements Discoservice {
     }
 
     @Override
-    public List<DiscoResponse> procura_todos(Integer page, Integer pageSize) {
+    public List<Disco> procura_todos(Integer page, Integer pageSize) {
 
         PanacheQuery<Disco> query = null;
         if (page == null || pageSize == null)
@@ -55,7 +55,13 @@ public class Discoimpl implements Discoservice {
         else
             query = repository.findAll().page(page, pageSize);
 
-        return DiscoResponse.valueOf1(query);
+        return query.list();
+    }
+
+    
+    @Override
+    public Long count() {
+      return  repository.count();
     }
 
 }

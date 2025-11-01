@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.acme.dto.PlataformaResponse;
 import org.acme.dto.Plataformadto;
+import org.acme.model.Plataforma;
 
 public interface Plataformaservice {
         PlataformaResponse inserir(Plataformadto plataforma);
@@ -11,5 +12,6 @@ public interface Plataformaservice {
     void deletar(Long id);
     PlataformaResponse procura_id(Long id);
     PlataformaResponse procura_nome(String nome);
-List<PlataformaResponse> procura_todos(Integer page, Integer pageSize);
+    List<Plataforma> procura_todos(Integer page, Integer pageSize);
+    Long count();
 }

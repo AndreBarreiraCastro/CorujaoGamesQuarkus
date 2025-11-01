@@ -49,7 +49,7 @@ public class Colecaoimpl implements Colecaoservice {
     }
 
     @Override
-    public List<ColecaoResponse> procura_todos(Integer page, Integer pageSize) {
+    public List<Colecao> procura_todos(Integer page, Integer pageSize) {
         
           PanacheQuery<Colecao> query = null;
         if (page == null || pageSize == null)
@@ -57,7 +57,12 @@ public class Colecaoimpl implements Colecaoservice {
         else
             query = repository.findAll().page(page, pageSize);
 
-        return ColecaoResponse.valueOf1( query);
+        return query.list();
+    }
+
+    @Override
+    public Long count() {
+      return  repository.count();
     }
     
 }

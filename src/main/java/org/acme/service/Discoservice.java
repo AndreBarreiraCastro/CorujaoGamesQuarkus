@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.acme.dto.DiscoResponse;
 import org.acme.dto.Discodto;
+import org.acme.model.Disco;
 
 public interface Discoservice {
     DiscoResponse inserir(Discodto disco);
@@ -14,6 +15,8 @@ public interface Discoservice {
 
     DiscoResponse procura_id(Long id);
 
-    List<DiscoResponse> procura_todos(Integer page, Integer pageSize);
+    List<Disco> procura_todos(Integer page, Integer pageSize);
+
+    Long count();
 
 }

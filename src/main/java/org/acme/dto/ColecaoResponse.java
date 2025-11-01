@@ -8,7 +8,7 @@ import io.quarkus.hibernate.orm.panache.PanacheQuery;
 
 public record ColecaoResponse(
     Long id,
-    String nome
+    String nomeColecao
 ) {
 
     public static ColecaoResponse valueOf(Colecao colecao) {

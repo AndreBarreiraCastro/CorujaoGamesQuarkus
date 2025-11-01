@@ -2,9 +2,9 @@ package org.acme.resouce;
 
 import java.util.List;
 
-import org.acme.dto.ColecaoResponse;
 import org.acme.dto.SagaResponse;
 import org.acme.dto.Sagadto;
+import org.acme.model.Saga;
 import org.acme.service.Sagaservice;
 
 import jakarta.inject.Inject;
@@ -61,10 +61,17 @@ public class Sagaresource {
     public SagaResponse procuranome(@PathParam("nome") String nome) {
         return service.procura_nome(nome);
     }
-
+    
     @GET
-    public List<SagaResponse> procuratodos(@QueryParam("page") @DefaultValue("0") int page,
-            @QueryParam("page_size") @DefaultValue("100") int pageSize) {
+    @Path("/procuratodos")
+    public List<Saga> procuratodos(@QueryParam("page") @DefaultValue("0") int page,
+    @QueryParam("pageSize") @DefaultValue("100") int pageSize) {
         return service.procura_todos(page, pageSize);
+    }
+    
+    @GET
+    @Path("/count")
+    public Long count() {
+        return service.count();
     }
 }

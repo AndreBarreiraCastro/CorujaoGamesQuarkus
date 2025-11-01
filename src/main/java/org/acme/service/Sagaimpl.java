@@ -49,14 +49,19 @@ public class Sagaimpl implements Sagaservice {
     }
 
     @Override
-    public List<SagaResponse> procura_todos(Integer page, Integer pageSize) {
+    public List<Saga> procura_todos(Integer page, Integer pageSize) {
           PanacheQuery<Saga> query = null;
         if (page == null || pageSize == null)
             query = repository.findAll();
         else
             query = repository.findAll().page(page, pageSize);
 
-        return SagaResponse.valueOf1( query);
+        return query.list();
+    }
+
+    @Override
+    public Long count() {
+    return repository.count();
     }
 
     }
