@@ -15,7 +15,7 @@ public record JogoResponse(
         Long id,
         String titulo,
         String genero,
-        Double valorUnit,
+        Double PrecoUnit,
         Midia midia,
         Saga jogoSaga,
         Classificacao jogoClassificacao,

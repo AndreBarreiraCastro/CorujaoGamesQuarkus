@@ -49,13 +49,13 @@ public class Jogoimpl implements Jogoservice {
         novo.setJogoMidia(midiarepository.findById(jogo.getJogoMidia()));
         novo.setTitulo(jogo.getTitulo());
         novo.setJogoSaga(sagarepository.findById(jogo.getJogoSaga()));
+        novo.setPrecoUnit(jogo.getprecoUnit());
 
         List<Plataforma> plataformas = jogo.getJogoPlataforma().stream()
                 .map(id -> plataformarepository.findById(id))
                 .toList();
 
         novo.setJogoPlataforma(plataformas);
-        novo.setPrecoUnit(jogo.getValorUnit());
         repository.persist(novo);
         return JogoResponse.valueOf(novo);
     }
@@ -76,13 +76,13 @@ public class Jogoimpl implements Jogoservice {
         existente.setJogoMidia(midiarepository.findById(jogo.getJogoMidia()));
         existente.setTitulo(jogo.getTitulo());
         existente.setJogoSaga(sagarepository.findById(jogo.getJogoSaga()));
+        existente.setPrecoUnit(jogo.getprecoUnit());
         
         List<Plataforma> plataformas = jogo.getJogoPlataforma().stream()
         .map(ids -> plataformarepository.findById(ids))
         .toList();
         
         existente.setJogoPlataforma(plataformas);
-        existente.setPrecoUnit(jogo.getValorUnit());
         repository.persist(existente);
     }
 

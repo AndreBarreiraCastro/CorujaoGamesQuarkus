@@ -20,7 +20,7 @@ public class Cartuchoimpl implements Cartuchoservice {
     @Override
     public CartuchoResponse inserir(Cartuchodto cartucho) {
         Cartucho novo = new Cartucho();
-        novo.setDesenvolvedora(cartucho.getDesenvolvedoraCartucho());
+        novo.setDesenvolvedora(cartucho.getDesenvolvedora());
         novo.setModoJogo(cartucho.getModoJogo());
         repository.persist(novo);
         return CartuchoResponse.valueOf(novo);
@@ -29,7 +29,7 @@ public class Cartuchoimpl implements Cartuchoservice {
     @Override
     public void atualizar(Long id, Cartuchodto cartucho) {
         Cartucho atualizado = repository.findById(id);
-        atualizado.setDesenvolvedora(cartucho.getDesenvolvedoraCartucho());
+        atualizado.setDesenvolvedora(cartucho.getDesenvolvedora());
         atualizado.setModoJogo(cartucho.getModoJogo());
         repository.persist(atualizado);
         repository.persist(atualizado);

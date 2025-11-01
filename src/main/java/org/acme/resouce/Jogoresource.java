@@ -37,7 +37,7 @@ public class Jogoresource {
 
     @PUT
     @Transactional
-    @Path("/{id}")
+    @Path("/alterar/{id}")
     public void atualizar(@PathParam("id") Long id, Jogodto jogo) {
 
         service.atualizar(id, jogo);
@@ -67,5 +67,4 @@ public class Jogoresource {
             @QueryParam("page_size") @DefaultValue("100") int pageSize) {
         return service.procura_todos(page, pageSize);
     }
-
 }

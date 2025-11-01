@@ -5,17 +5,19 @@ import jakarta.validation.constraints.NotNull;
 public class Cartuchodto {
 
     @NotNull(message = "O nome deve ser informado (back).")
-    private String desenvolvedoraCartucho;
+    private String desenvolvedora;
 
     @NotNull(message = "O nome deve ser informado (back).")
     private String modoJogo;
 
-    public String getDesenvolvedoraCartucho() {
-        return desenvolvedoraCartucho;
-    }
+  
 
     public String getModoJogo() {
         return modoJogo;
+    }
+
+    public String getDesenvolvedora() {
+        return desenvolvedora;
     }
 
 }

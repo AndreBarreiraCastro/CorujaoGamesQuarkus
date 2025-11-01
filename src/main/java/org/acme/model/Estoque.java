@@ -16,7 +16,5 @@ public class Estoque extends DefaultEntity {
     public void setQuantidade(int quantidade) {
         this.quantidade = quantidade;
     }
-
-      
-    
+  
 }

@@ -8,7 +8,7 @@ import io.quarkus.hibernate.orm.panache.PanacheQuery;
 
 public record CartuchoResponse(
     Long id,
-    String desenvolvedoraCartucho,
+    String desenvolvedora,
     String modoJogo
 ) {
 

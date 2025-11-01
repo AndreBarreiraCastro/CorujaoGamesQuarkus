@@ -13,7 +13,7 @@ public class Jogodto {
   private String genero;
   
   @NotNull(message = "O valor deve ser informado.")
-  private Double valorUnit;
+  private Double precoUnit;
   
   @NotNull(message = "A  Saga deve ser informado.")
   private Long jogoSaga;
@@ -38,9 +38,7 @@ public class Jogodto {
     return genero;
   }
 
-  public Double getValorUnit() {
-    return valorUnit;
-  }
+ 
 
   public Long getJogoSaga() {
     return jogoSaga;
@@ -60,6 +58,10 @@ public class Jogodto {
 
     public List<Long> getJogoPlataforma() {
         return jogoPlataforma;
+    }
+
+    public Double getprecoUnit() {
+      return precoUnit;
     }
 
   

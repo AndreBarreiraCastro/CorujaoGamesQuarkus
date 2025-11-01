@@ -2,6 +2,7 @@ package org.acme.model;
 
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
@@ -38,8 +39,11 @@ public class Jogo extends DefaultEntity {
     @JoinColumn(name = "jogoMidia_id", nullable = false)
     private Midia jogoMidia;
     
-    @ManyToMany
-    @JoinTable(name="jogoPlataforma_id")
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinTable( name = "jogo_plataforma",                                  // nome da tabela de junção
+        joinColumns = @JoinColumn(name = "jogo_id"),              // FK para Jogo
+        inverseJoinColumns = @JoinColumn(name = "plataforma_id")
+        )
     private List<Plataforma> jogoPlataforma;
 
 
