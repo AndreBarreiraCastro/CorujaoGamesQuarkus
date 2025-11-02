@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.acme.dto.EstoqueResponse;
 import org.acme.dto.Estoquedto;
+import org.acme.model.Estoque;
 
 public interface Estoqueservice {
     EstoqueResponse inserir(Estoquedto estoque);
@@ -14,5 +15,8 @@ public interface Estoqueservice {
 
     EstoqueResponse procura_id(Long id);
 
-    List<EstoqueResponse> procura_todos(Integer page, Integer pageSize);
+    List<Estoque> procura_todos(Integer page, Integer pageSize);
+
+    Long count();
+
 }

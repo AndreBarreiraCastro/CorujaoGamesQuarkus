@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.acme.dto.CartuchoResponse;
 import org.acme.dto.Cartuchodto;
+import org.acme.model.Cartucho;
 
 public interface Cartuchoservice {
     CartuchoResponse inserir(Cartuchodto cartucho);
@@ -14,6 +15,8 @@ public interface Cartuchoservice {
 
     CartuchoResponse procura_id(Long id);
 
-    List<CartuchoResponse> procura_todos(Integer page, Integer pageSize);
+    List<Cartucho> procura_todos(Integer page, Integer pageSize);
+
+    Long count();
 
 }

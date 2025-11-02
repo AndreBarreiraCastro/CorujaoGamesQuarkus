@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.acme.dto.EstoqueResponse;
 import org.acme.dto.Estoquedto;
+import org.acme.model.Estoque;
 import org.acme.service.Estoqueservice;
 
 import jakarta.inject.Inject;
@@ -54,13 +55,20 @@ public class Estoqueresource {
     public EstoqueResponse procuraid(@PathParam("id") Long id) {
         return service.procura_id(id);
     }
-
-      @GET
-      public List<EstoqueResponse>
-      procuratodos(@QueryParam("page") @DefaultValue("0") int page,
-      
-      @QueryParam("page_size") @DefaultValue("100") int pageSize) {
-      return service.procura_todos(page, pageSize);
-      }
-     
+    
+    @GET
+    @Path("procuratodos")
+    public List<Estoque> procuratodos(@QueryParam("page") @DefaultValue("0") int page,
+    
+    @QueryParam("pageSize") @DefaultValue("100") int pageSize) {
+        return service.procura_todos(page, pageSize);
+    }
+    
+        @GET
+        @Path("count")
+        public Long count() {
+            return service.count();
+        }
+        
+    
 }

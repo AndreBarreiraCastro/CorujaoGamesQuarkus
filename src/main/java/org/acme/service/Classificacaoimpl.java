@@ -18,7 +18,7 @@ public class Classificacaoimpl implements Classificacaoservice {
     Classificacaorepository repository;
 
     @Override
-    public ClassificacaoResponse inserir( Classificacaodto classificacao) {
+    public ClassificacaoResponse inserir(Classificacaodto classificacao) {
         Classificacao novo = new Classificacao();
         novo.setClassificacao(classificacao.getClassificacao());
         novo.setDescricao(classificacao.getdescricao());
@@ -44,20 +44,21 @@ public class Classificacaoimpl implements Classificacaoservice {
         Classificacao achado = repository.findById(id);
         return ClassificacaoResponse.valueOf(achado);
     }
-    
-      
-      @Override
-      public List<ClassificacaoResponse> procura_todos(Integer page, Integer pageSize) {
-      PanacheQuery<Classificacao> query = null;
-      if (page == null || pageSize == null)
-      query = repository.findAll();
-      else
-      query = repository.findAll().page(page, pageSize);
-      
-      return ClassificacaoResponse.valueOf1( query);
-      }
-      
-    
 
-   
+    @Override
+    public List<Classificacao> procura_todos(Integer page, Integer pageSize) {
+        PanacheQuery<Classificacao> query = null;
+        if (page == null || pageSize == null)
+            query = repository.findAll();
+        else
+            query = repository.findAll().page(page, pageSize);
+
+        return query.list();
+    }
+
+    @Override
+    public Long count() {
+        return repository.count();
+    }
+
 }

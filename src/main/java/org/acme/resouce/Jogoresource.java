@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.acme.dto.JogoResponse;
 import org.acme.dto.Jogodto;
+import org.acme.model.Jogo;
 import org.acme.service.Jogoservice;
 
 import jakarta.inject.Inject;
@@ -25,7 +26,7 @@ import jakarta.ws.rs.core.MediaType;
 @Consumes(MediaType.APPLICATION_JSON)
 
 public class Jogoresource {
-    
+
     @Inject
     Jogoservice service;
 
@@ -56,15 +57,25 @@ public class Jogoresource {
         return service.procura_id(id);
     }
 
-   /*  @GET
-    @Path("/nome/{nome}")
-    public JogoResponse procuranome(@PathParam("nome") String nome) {
-        return service.procura_nome(nome);
-    } */
+    /*
+     * @GET
+     * 
+     * @Path("/nome/{nome}")
+     * public JogoResponse procuranome(@PathParam("nome") String nome) {
+     * return service.procura_nome(nome);
+     * }
+     */
 
     @GET
-    public List<JogoResponse> procuratodos(@QueryParam("page") @DefaultValue("0") int page,
-            @QueryParam("page_size") @DefaultValue("100") int pageSize) {
+    @Path("procuratodos")
+    public List<Jogo> procuratodos(@QueryParam("page") @DefaultValue("0") int page,
+            @QueryParam("pageSize") @DefaultValue("100") int pageSize) {
         return service.procura_todos(page, pageSize);
+    }
+
+    @GET
+    @Path("count")
+    public Long count() {
+        return service.count();
     }
 }

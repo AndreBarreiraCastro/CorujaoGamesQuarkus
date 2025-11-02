@@ -47,7 +47,7 @@ public class Cartuchoimpl implements Cartuchoservice {
     }
 
     @Override
-    public List<CartuchoResponse> procura_todos(Integer page, Integer pageSize) {
+    public List<Cartucho> procura_todos(Integer page, Integer pageSize) {
 
         PanacheQuery<Cartucho> query = null;
         if (page == null || pageSize == null)
@@ -55,7 +55,12 @@ public class Cartuchoimpl implements Cartuchoservice {
         else
             query = repository.findAll().page(page, pageSize);
 
-        return CartuchoResponse.valueOf1(query);
+        return query.list();
+    }
+
+    @Override
+    public Long count() {
+        return repository.count();
     }
 
 }

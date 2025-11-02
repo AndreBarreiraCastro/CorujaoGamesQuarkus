@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.acme.dto.CartuchoResponse;
 import org.acme.dto.Cartuchodto;
+import org.acme.model.Cartucho;
 import org.acme.repository.Cartuchorepository;
 import org.acme.service.Cartuchoservice;
 
@@ -71,8 +72,15 @@ public class Cartuchoresource {
     }
 
     @GET
-    public List<CartuchoResponse> procuratodos(@QueryParam("page") @DefaultValue("0") int page,
-            @QueryParam("page_size") @DefaultValue("100") int pageSize) {
+    @Path("procuratodos")
+    public List<Cartucho> procuratodos(@QueryParam("page") @DefaultValue("0") int page,
+            @QueryParam("pageSize") @DefaultValue("100") int pageSize) {
         return service.procura_todos(page, pageSize);
+    }
+
+    @GET
+    @Path("count")
+    public Long count() {
+        return service.count();
     }
 }

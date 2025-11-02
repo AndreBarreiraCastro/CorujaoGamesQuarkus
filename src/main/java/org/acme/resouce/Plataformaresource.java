@@ -66,7 +66,7 @@ Plataformaservice service;
     @GET
     @Path("/procuratodos")
     public List<Plataforma> procuratodos(@QueryParam("page") @DefaultValue("0") int page,
-    @QueryParam("page_size") @DefaultValue("100") int pageSize) { 
+    @QueryParam("pageSize") @DefaultValue("100") int pageSize) { 
         return service.procura_todos(page, pageSize);
     }
     

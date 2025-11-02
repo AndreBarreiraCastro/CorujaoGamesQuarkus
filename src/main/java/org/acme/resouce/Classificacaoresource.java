@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.acme.dto.ClassificacaoResponse;
 import org.acme.dto.Classificacaodto;
+import org.acme.model.Classificacao;
 import org.acme.service.Classificacaoservice;
 
 import jakarta.inject.Inject;
@@ -55,11 +56,19 @@ public class Classificacaoresource {
     public ClassificacaoResponse procuraid(@PathParam("id") Long id) {
         return service.procura_id(id);
     }
-      
-      @GET
-      public List<ClassificacaoResponse>
-      procuratodos(@QueryParam("page") @DefaultValue("0") int page,@QueryParam("page_size") @DefaultValue("100") int pageSize) {
-      return service.procura_todos(page, pageSize);
-      }
+    
+    @GET
+    @Path("procuratodos")
+    public List<Classificacao>
+    procuratodos(@QueryParam("page") @DefaultValue("0") int page,@QueryParam("pageSize") @DefaultValue("100") int pageSize) {
+        return service.procura_todos(page, pageSize);
+    }
+    
+        @GET
+        @Path("count")
+        public Long count() {
+            return service.count();
+        }
+        
     
 }
