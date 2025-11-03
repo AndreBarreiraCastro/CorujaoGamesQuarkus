@@ -106,14 +106,14 @@ public class Jogoimpl implements Jogoservice {
      */
 
     @Override
-    public List<Jogo> procura_todos(Integer page, Integer pageSize) {
+    public List<JogoResponse> procura_todos(Integer page, Integer pageSize) {
         PanacheQuery<Jogo> query = null;
         if (page == null || pageSize == null)
             query = repository.findAll();
         else
             query = repository.findAll().page(page, pageSize);
 
-        return query.list();
+        return JogoResponse.valueOf1(query);
     }
 
     

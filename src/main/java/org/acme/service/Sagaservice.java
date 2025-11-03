@@ -17,6 +17,8 @@ public interface Sagaservice {
 
     SagaResponse procura_nome(String nome);
 
+    List<SagaResponse> procura();
+
     List<Saga> procura_todos(Integer page, Integer pageSize);
     Long count();
 }

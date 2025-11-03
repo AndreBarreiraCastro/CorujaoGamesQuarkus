@@ -3,7 +3,6 @@ package org.acme.dto;
 import java.util.List;
 
 import org.acme.model.Classificacao;
-import org.acme.model.Estoque;
 import org.acme.model.Jogo;
 import org.acme.model.Midia;
 import org.acme.model.Plataforma;
@@ -19,7 +18,7 @@ public record JogoResponse(
         Midia midia,
         Saga jogoSaga,
         Classificacao jogoClassificacao,
-        Estoque jogoEstoque,
+        Long jogoEstoque,
         List<Plataforma> jogoPlataforma) {
 
     public static JogoResponse valueOf(Jogo jogo) {
@@ -31,7 +30,7 @@ public record JogoResponse(
                 jogo.getJogoMidia(),
                 jogo.getJogoSaga(),
                 jogo.getJogoClassificacao(),
-                jogo.getJogoEstoque(),
+                jogo.getJogoEstoque().getId(),
                 jogo.getJogoPlataforma());
     }
 
@@ -45,7 +44,7 @@ public record JogoResponse(
                         e.getJogoMidia(),
                         e.getJogoSaga(),
                         e.getJogoClassificacao(),
-                        e.getJogoEstoque(),
+                        e.getJogoEstoque().getId(),
                         e.getJogoPlataforma()))
                 .toList();
     }

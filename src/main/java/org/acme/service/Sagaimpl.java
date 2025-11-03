@@ -64,6 +64,11 @@ public class Sagaimpl implements Sagaservice {
     return repository.count();
     }
 
+    @Override
+    public List<SagaResponse> procura() {
+        return SagaResponse.valueOf1( repository.findAll());
+    }
+
     }
     
 

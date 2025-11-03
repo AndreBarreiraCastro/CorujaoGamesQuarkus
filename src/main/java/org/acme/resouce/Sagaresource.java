@@ -74,4 +74,9 @@ public class Sagaresource {
     public Long count() {
         return service.count();
     }
+    @GET
+    @Path("/todos")
+    public List<SagaResponse> todos() {
+        return service.procura();
+    }
 }

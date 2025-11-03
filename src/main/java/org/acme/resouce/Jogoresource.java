@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.acme.dto.JogoResponse;
 import org.acme.dto.Jogodto;
-import org.acme.model.Jogo;
 import org.acme.service.Jogoservice;
 
 import jakarta.inject.Inject;
@@ -68,7 +67,7 @@ public class Jogoresource {
 
     @GET
     @Path("procuratodos")
-    public List<Jogo> procuratodos(@QueryParam("page") @DefaultValue("0") int page,
+    public List<JogoResponse> procuratodos(@QueryParam("page") @DefaultValue("0") int page,
             @QueryParam("pageSize") @DefaultValue("100") int pageSize) {
         return service.procura_todos(page, pageSize);
     }
