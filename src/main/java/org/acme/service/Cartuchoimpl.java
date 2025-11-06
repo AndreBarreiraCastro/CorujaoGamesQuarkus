@@ -19,6 +19,8 @@ public class Cartuchoimpl implements Cartuchoservice {
 
     @Override
     public CartuchoResponse inserir(Cartuchodto cartucho) {
+
+        validarDados(cartucho, null);
         Cartucho novo = new Cartucho();
         novo.setDesenvolvedora(cartucho.getDesenvolvedora());
         novo.setModoJogo(cartucho.getModoJogo());
@@ -62,5 +64,7 @@ public class Cartuchoimpl implements Cartuchoservice {
     public Long count() {
         return repository.count();
     }
-
+    private void validarDados(Cartuchodto dto, Long id) {
+        
+    }
 }

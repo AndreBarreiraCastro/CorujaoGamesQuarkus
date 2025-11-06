@@ -19,6 +19,8 @@ public class Plataformaimpl implements Plataformaservice {
 
     @Override
     public PlataformaResponse inserir(Plataformadto plataforma) {
+        
+        validarDados(plataforma, null);
         Plataforma novo = new Plataforma();
         novo.setNomePlataforma(plataforma.getNomePlataforma());
         repository.persist(novo);
@@ -65,5 +67,9 @@ public class Plataformaimpl implements Plataformaservice {
 
         return repository.count();
 
+    }
+
+            private void validarDados(Plataformadto dto, Long id) {
+        
     }
 }

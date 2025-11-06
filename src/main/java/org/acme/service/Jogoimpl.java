@@ -42,6 +42,8 @@ public class Jogoimpl implements Jogoservice {
 
     @Override
     public JogoResponse inserir(Jogodto jogo) {
+
+        validarDados(jogo,null);
         Jogo novo = new Jogo();
         novo.setGenero(jogo.getGenero());
         novo.setJogoClassificacao(classificacaorepository.findById(jogo.getJogoClassificacao()));
@@ -121,4 +123,9 @@ public class Jogoimpl implements Jogoservice {
     public Long count() {
     return repository.count();    
     }
+
+    private void validarDados(Jogodto dto, Long id) {
+        
+    }
+
 }

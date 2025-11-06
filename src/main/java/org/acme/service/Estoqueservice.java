@@ -6,8 +6,10 @@ import org.acme.dto.EstoqueResponse;
 import org.acme.dto.Estoquedto;
 import org.acme.model.Estoque;
 
+import jakarta.validation.Valid;
+
 public interface Estoqueservice {
-    EstoqueResponse inserir(Estoquedto estoque);
+    EstoqueResponse inserir(@Valid Estoquedto estoque);
 
     void atualizar(Long id, Estoquedto estoque);
 

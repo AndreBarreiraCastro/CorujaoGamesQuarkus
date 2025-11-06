@@ -6,8 +6,10 @@ import org.acme.dto.CartuchoResponse;
 import org.acme.dto.Cartuchodto;
 import org.acme.model.Cartucho;
 
+import jakarta.validation.Valid;
+
 public interface Cartuchoservice {
-    CartuchoResponse inserir(Cartuchodto cartucho);
+    CartuchoResponse inserir(@Valid Cartuchodto cartucho);
 
     void atualizar(Long id, Cartuchodto cartucho);
 

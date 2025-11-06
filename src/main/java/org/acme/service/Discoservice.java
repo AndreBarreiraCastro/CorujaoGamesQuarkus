@@ -6,8 +6,10 @@ import org.acme.dto.DiscoResponse;
 import org.acme.dto.Discodto;
 import org.acme.model.Disco;
 
+import jakarta.validation.Valid;
+
 public interface Discoservice {
-    DiscoResponse inserir(Discodto disco);
+    DiscoResponse inserir(@Valid Discodto disco);
 
     void atualizar(Long id, Discodto disco);
 

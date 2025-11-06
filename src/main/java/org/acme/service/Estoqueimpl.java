@@ -19,6 +19,8 @@ public class Estoqueimpl implements Estoqueservice {
 
     @Override
     public EstoqueResponse inserir(Estoquedto estoque) {
+
+        validarDados(estoque, null);
         Estoque novo = new Estoque();
         novo.setQuantidade(estoque.getQuantidade());
         repository.persist(novo);
@@ -59,5 +61,9 @@ public class Estoqueimpl implements Estoqueservice {
     @Override
     public Long count() {
     return repository.count();    
+    }
+
+        private void validarDados(Estoquedto dto, Long id) {
+        
     }
 }

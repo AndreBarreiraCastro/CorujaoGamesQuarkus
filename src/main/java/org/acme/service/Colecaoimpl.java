@@ -18,6 +18,8 @@ public class Colecaoimpl implements Colecaoservice {
 
     @Override
     public ColecaoResponse inserir(Colecaodto colecao) {
+
+    validarDados(colecao, null);
     Colecao novo = new Colecao();
     novo.setNomeColecao(colecao.getNomeColecao());
     repository.persist(novo);
@@ -64,5 +66,7 @@ public class Colecaoimpl implements Colecaoservice {
     public Long count() {
       return  repository.count();
     }
-    
+        private void validarDados(Colecaodto dto, Long id) {
+        
+    }
 }

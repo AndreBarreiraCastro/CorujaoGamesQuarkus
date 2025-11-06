@@ -4,7 +4,7 @@ import jakarta.validation.constraints.NotNull;
 
 public class Sagadto {
 
-  @NotNull(message = "O nome deve ser informado (back).")
+  @NotNull(message = "O nome deve ser informado.")
   private String nomeSaga;
 
   public String getNomeSaga() {

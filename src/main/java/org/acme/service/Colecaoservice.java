@@ -6,8 +6,10 @@ import org.acme.dto.ColecaoResponse;
 import org.acme.dto.Colecaodto;
 import org.acme.model.Colecao;
 
+import jakarta.validation.Valid;
+
 public interface Colecaoservice {
-    ColecaoResponse inserir(Colecaodto colecao);
+    ColecaoResponse inserir(@Valid Colecaodto colecao);
     void atualizar(Long id,Colecaodto colecao);
     void deletar(Long id);
     ColecaoResponse procura_id(Long id);

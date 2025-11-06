@@ -19,6 +19,7 @@ public class Classificacaoimpl implements Classificacaoservice {
 
     @Override
     public ClassificacaoResponse inserir(Classificacaodto classificacao) {
+        validarDados(classificacao, null);
         Classificacao novo = new Classificacao();
         novo.setClassificacao(classificacao.getClassificacao());
         novo.setDescricao(classificacao.getdescricao());
@@ -60,5 +61,7 @@ public class Classificacaoimpl implements Classificacaoservice {
     public Long count() {
         return repository.count();
     }
-
+    private void validarDados(Classificacaodto dto, Long id) {
+        
+    }
 }

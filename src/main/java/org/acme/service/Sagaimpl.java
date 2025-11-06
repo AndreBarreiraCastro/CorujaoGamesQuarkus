@@ -4,12 +4,14 @@ import java.util.List;
 
 import org.acme.dto.SagaResponse;
 import org.acme.dto.Sagadto;
+import org.acme.exeception.ValidationException;
 import org.acme.model.Saga;
 import org.acme.repository.Sagarepository;
 
 import io.quarkus.hibernate.orm.panache.PanacheQuery;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
+
 @ApplicationScoped
 public class Sagaimpl implements Sagaservice {
 
@@ -19,6 +21,7 @@ public class Sagaimpl implements Sagaservice {
     @Override
     public SagaResponse inserir(Sagadto saga) {
         Saga novo = new Saga();
+
         novo.setNomeSaga(saga.getNomeSaga());
         repository.persist(novo);
         return SagaResponse.valueOf(novo);
@@ -50,7 +53,7 @@ public class Sagaimpl implements Sagaservice {
 
     @Override
     public List<Saga> procura_todos(Integer page, Integer pageSize) {
-          PanacheQuery<Saga> query = null;
+        PanacheQuery<Saga> query = null;
         if (page == null || pageSize == null)
             query = repository.findAll();
         else
@@ -61,14 +64,16 @@ public class Sagaimpl implements Sagaservice {
 
     @Override
     public Long count() {
-    return repository.count();
+        return repository.count();
     }
 
     @Override
     public List<SagaResponse> procura() {
-        return SagaResponse.valueOf1( repository.findAll());
+        return SagaResponse.valueOf1(repository.findAll());
     }
 
+        private void validarDados(Sagadto dto, Long id) {
+        if (dto != null)
+           throw ValidationException.of("sigla", "Já existe um estado cadastrado com essa sigla.");
     }
-    
-
+}

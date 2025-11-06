@@ -6,8 +6,10 @@ import org.acme.dto.ClassificacaoResponse;
 import org.acme.dto.Classificacaodto;
 import org.acme.model.Classificacao;
 
+import jakarta.validation.Valid;
+
 public interface Classificacaoservice {
-  ClassificacaoResponse inserir(Classificacaodto classificacao);
+  ClassificacaoResponse inserir(@Valid Classificacaodto classificacao);
 
   void atualizar(Long id, Classificacaodto classificacao);
 

@@ -19,6 +19,8 @@ public class Discoimpl implements Discoservice {
 
     @Override
     public DiscoResponse inserir(Discodto disco) {
+
+        validarDados(disco,null);
         Disco novo = new Disco();
         novo.setDesenvolvedora(disco.getDesenvolvedora());
         novo.setModoJogo(disco.getModoJogo());
@@ -63,5 +65,7 @@ public class Discoimpl implements Discoservice {
     public Long count() {
       return  repository.count();
     }
-
+    private void validarDados(Discodto dto, Long id) {
+        
+    }
 }

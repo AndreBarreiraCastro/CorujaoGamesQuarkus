@@ -6,8 +6,10 @@ import org.acme.dto.SagaResponse;
 import org.acme.dto.Sagadto;
 import org.acme.model.Saga;
 
+import jakarta.validation.Valid;
+
 public interface Sagaservice {
-    SagaResponse inserir(Sagadto saga);
+    SagaResponse inserir(@Valid Sagadto saga);
 
     void atualizar(Long id, Sagadto saga);
 
