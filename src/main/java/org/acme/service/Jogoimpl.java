@@ -39,6 +39,7 @@ public class Jogoimpl implements Jogoservice {
 
     @Inject
     Midiarepository midiarepository;
+    
 
     @Override
     public JogoResponse inserir(Jogodto jogo) {
@@ -52,7 +53,7 @@ public class Jogoimpl implements Jogoservice {
         novo.setTitulo(jogo.getTitulo());
         novo.setJogoSaga(sagarepository.findById(jogo.getJogoSaga()));
         novo.setPrecoUnit(jogo.getprecoUnit());
-
+        novo.setJogoImagem(jogo.getJogoImagem());
         List<Plataforma> plataformas = jogo.getJogoPlataforma().stream()
                 .map(id -> plataformarepository.findById(id))
                 .toList();
@@ -61,6 +62,8 @@ public class Jogoimpl implements Jogoservice {
         repository.persist(novo);
         return JogoResponse.valueOf(novo);
     }
+
+
 
     @Override
     @Transactional
@@ -98,14 +101,7 @@ public class Jogoimpl implements Jogoservice {
         return JogoResponse.valueOf(repository.findById(id));
     }
 
-    /*
-     * @Override
-     * public JogoResponse procura_nome(String nome) {
-     * // TODO Auto-generated method stub
-     * throw new
-     * UnsupportedOperationException("Unimplemented method 'procura_nome'");
-     * }
-     */
+
 
     @Override
     public List<JogoResponse> procura_todos(Integer page, Integer pageSize) {
@@ -127,5 +123,6 @@ public class Jogoimpl implements Jogoservice {
     private void validarDados(Jogodto dto, Long id) {
         
     }
+
 
 }

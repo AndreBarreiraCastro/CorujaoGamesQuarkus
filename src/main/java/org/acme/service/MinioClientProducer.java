@@ -1,9 +1,10 @@
 package org.acme.service;
 
+import org.eclipse.microprofile.config.inject.ConfigProperty;
+
 import io.minio.MinioClient;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.inject.Produces;
-import org.eclipse.microprofile.config.inject.ConfigProperty;
 
 @ApplicationScoped
 public class MinioClientProducer {
@@ -22,6 +23,9 @@ public class MinioClientProducer {
 
     @ConfigProperty(name = "minio.secret-key")
     String secretKey;
+   
+    @ConfigProperty(name = "minio.bucket.default")
+    String bucket;
 
     @Produces
     @ApplicationScoped

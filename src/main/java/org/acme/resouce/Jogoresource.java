@@ -29,8 +29,9 @@ public class Jogoresource {
     @Inject
     Jogoservice service;
 
-    @POST
+     @POST
     @Transactional
+    @Path("/criar")
     public JogoResponse inserir(Jogodto jogo) {
         return service.inserir(jogo);
     }

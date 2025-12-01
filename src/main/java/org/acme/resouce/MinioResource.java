@@ -6,6 +6,9 @@ import java.util.Map;
 import org.acme.service.MinioService;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 
+import io.minio.GetObjectArgs;
+import io.minio.GetObjectResponse;
+import io.minio.MinioClient;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
@@ -27,6 +30,9 @@ public class MinioResource {
     @Inject
     MinioService minioService;
 
+    @Inject
+    MinioClient minio;
+
     @ConfigProperty(name = "minio.bucket.default")
     String defaultBucket;
 
@@ -35,81 +41,59 @@ public class MinioResource {
         @FormParam("file")
         public InputStream file;
 
-        @FormParam("objectName")
-        public String objectName;
-
         @FormParam("contentType")
         public String contentType;
     }
 
     // Upload ---------------------------------------------
-@POST
-@Path("/upload-image")
-@Consumes(MediaType.APPLICATION_OCTET_STREAM)
-@Produces(MediaType.APPLICATION_JSON)
-public Response uploadImage(
-        @QueryParam("objectName") String objectName,
-        @HeaderParam("Content-Type") String contentType,
-        InputStream fileStream
-) {
-    try {
-        if (objectName == null || objectName.isBlank()) {
-            return Response.status(400)
-                    .entity(Map.of("error", "objectName é obrigatório"))
-                    .build();
+    @POST
+    @Path("/upload-image")
+    @Consumes(MediaType.APPLICATION_OCTET_STREAM)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response uploadImage(
+            @HeaderParam("Content-Type") String contentType,
+            InputStream fileStream) {
+        try {
+
+            // Se o client não mandar o tipo, detecta pela extensão
+
+            String nome = new String();
+            nome = minioService.upload(fileStream, contentType);
+
+            return Response.ok(Map.of(
+                    "object", nome,
+                    "content-type", contentType)).build();
+
+        } catch (Exception e) {
+            return Response.status(500).entity(Map.of("error", e.getMessage())).build();
         }
-
-        // Se o client não mandar o tipo, detecta pela extensão
-        if (contentType == null || contentType.isBlank() || contentType.equals(MediaType.APPLICATION_OCTET_STREAM)) {
-            if (objectName.toLowerCase().endsWith(".png")) {
-                contentType = "image/png";
-            } else if (objectName.toLowerCase().endsWith(".jpg") ||
-                       objectName.toLowerCase().endsWith(".jpeg")) {
-                contentType = "image/jpeg";
-            } else {
-                contentType = MediaType.APPLICATION_OCTET_STREAM; // fallback
-            }
-        }
-
-        minioService.upload(defaultBucket, objectName, fileStream, contentType);
-
-        return Response.ok(Map.of(
-                "object", objectName,
-                "contentType", contentType
-        )).build();
-
-      } catch (Exception e) {
-        return Response.status(500).entity(Map.of("error", e.getMessage())).build();
     }
-}
 
     // Download ---------------------------------------------
     @GET
-@Path("/image/{objectName}")
-public Response downloadImage(@PathParam("objectName") String objectName) {
-    try {
-        InputStream is = minioService.download(defaultBucket, objectName);
+    @Path("/image/{objectName}")
+    public Response downloadImage(@PathParam("objectName") String objectName) {
+        try {
 
-        String contentType;
-        if (objectName.toLowerCase().endsWith(".png")) {
-            contentType = "image/png";
-        } else if (objectName.toLowerCase().endsWith(".jpg") ||
-                   objectName.toLowerCase().endsWith(".jpeg")) {
-            contentType = "image/jpeg";
-        } else {
-            contentType = MediaType.APPLICATION_OCTET_STREAM;
+            // Buscar o objeto no MinIO
+            GetObjectResponse object = minio.getObject(
+                    GetObjectArgs.builder()
+                            .bucket("meu-bucket")
+                            .object(objectName)
+                            .build());
+
+            // Pegando o tipo correto salvo durante o upload
+            String contentType = object.headers().get("Content-Type");
+
+            return Response.ok(object) // <-- GetObjectResponse já é InputStream
+                    .type(contentType != null ? contentType : MediaType.APPLICATION_OCTET_STREAM)
+                    .header("Content-Disposition", "inline; filename=\"" + objectName + "\"")
+                    .build();
+
+        } catch (Exception e) {
+            return Response.status(404).entity(Map.of("error", e.getMessage())).build();
         }
-
-        return Response.ok(is)
-                .type(contentType)
-                .header("Content-Disposition", "inline; filename=\"" + objectName + "\"")
-                .build();
-
-    } catch (Exception e) {
-        return Response.status(404).entity(Map.of("error", e.getMessage())).build();
     }
-}
-
 
     // Delete ----------------------------------------------
     @DELETE

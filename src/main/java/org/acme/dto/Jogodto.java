@@ -30,6 +30,9 @@ public class Jogodto {
   @NotNull(message = "O Estoque não foi escolhido.")
   private List<Long> jogoPlataforma;
 
+  private List<String> jogoImagem;
+
+  
   public String getTitulo() {
     return titulo;
   }
@@ -62,6 +65,10 @@ public class Jogodto {
 
     public Double getprecoUnit() {
       return precoUnit;
+    }
+
+    public List<String> getJogoImagem() {
+        return jogoImagem;
     }
 
   

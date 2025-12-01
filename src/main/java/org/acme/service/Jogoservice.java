@@ -8,7 +8,7 @@ import org.acme.dto.Jogodto;
 import jakarta.validation.Valid;
 
 public interface Jogoservice {
-    JogoResponse inserir(@Valid Jogodto jogo);
+      JogoResponse inserir(@Valid Jogodto jogo);
 
     void atualizar(Long id, Jogodto jogo);
 

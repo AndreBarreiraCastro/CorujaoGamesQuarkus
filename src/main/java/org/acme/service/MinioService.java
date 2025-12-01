@@ -1,15 +1,14 @@
 package org.acme.service;
 
-
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
+import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
-import org.eclipse.microprofile.config.inject.ConfigProperty;
-
-import io.minio.BucketExistsArgs;
 import io.minio.GetObjectArgs;
+import io.minio.GetObjectResponse;
 import io.minio.GetPresignedObjectUrlArgs;
-import io.minio.MakeBucketArgs;
 import io.minio.MinioClient;
 import io.minio.PutObjectArgs;
 import io.minio.RemoveObjectArgs;
@@ -23,45 +22,45 @@ public class MinioService {
     @Inject
     MinioClient minioClient;
 
-    @ConfigProperty(name = "minio.bucket.default")
-    String defaultBucket;
+public String upload(InputStream data, String contentType) throws Exception {
 
-    // Garante que o bucket existe (se não existir, cria)
-    public void ensureBucketExists(String bucket) throws Exception {
-        boolean exists = minioClient.bucketExists(
-                BucketExistsArgs.builder().bucket(bucket).build()
-        );
+    // Ler bytes do stream
+    ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+    data.transferTo(buffer);
+    byte[] bytes = buffer.toByteArray();
+    ByteArrayInputStream finalStream = new ByteArrayInputStream(bytes);
 
-        if (!exists) {
-            minioClient.makeBucket(
-                    MakeBucketArgs.builder().bucket(bucket).build()
-            );
-        }
-    }
+    // Sempre usar .jpeg
+    String extension = ".jpeg";
 
-    // Upload de arquivo
-   public void upload(String bucket, String objectName, InputStream data, String contentType) throws Exception {
-    ensureBucketExists(bucket);
+    // E garantir que o Content-Type seja image/jpeg
+    contentType = "image/jpeg";
 
+    // Nome final
+    String uniqueName = UUID.randomUUID().toString() + extension;
+
+    // Upload no MinIO
     PutObjectArgs args = PutObjectArgs.builder()
-            .bucket(bucket)
-            .object(objectName)
-            .stream(data, -1, 10 * 1024 * 1024) // enviar sem tamanho conhecido
+            .bucket("meu-bucket")
+            .object(uniqueName)
+            .stream(finalStream, bytes.length, -1)
             .contentType(contentType)
             .build();
 
     minioClient.putObject(args);
+
+    return uniqueName;
 }
 
 
+
     // Download
-    public InputStream download(String bucket, String objectName) throws Exception {
+    public GetObjectResponse download(String objectName) throws Exception {
         return minioClient.getObject(
                 GetObjectArgs.builder()
-                        .bucket(bucket)
+                        .bucket("meu-bucket")
                         .object(objectName)
-                        .build()
-        );
+                        .build());
     }
 
     // Remover arquivo
@@ -70,8 +69,7 @@ public class MinioService {
                 RemoveObjectArgs.builder()
                         .bucket(bucket)
                         .object(objectName)
-                        .build()
-        );
+                        .build());
     }
 
     // URL pré-assinada (download temporário)
@@ -82,7 +80,6 @@ public class MinioService {
                         .bucket(bucket)
                         .object(objectName)
                         .expiry(expirySeconds, TimeUnit.SECONDS)
-                        .build()
-        );
+                        .build());
     }
 }

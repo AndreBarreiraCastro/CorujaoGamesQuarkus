@@ -14,12 +14,13 @@ public record JogoResponse(
         Long id,
         String titulo,
         String genero,
-        Double PrecoUnit,
+        Double precoUnit,
         Midia midia,
         Saga jogoSaga,
         Classificacao jogoClassificacao,
         Long jogoEstoque,
-        List<Plataforma> jogoPlataforma) {
+        List<Plataforma> jogoPlataforma,
+        List<String> jogoImagem) {
 
     public static JogoResponse valueOf(Jogo jogo) {
         return new JogoResponse(
@@ -31,7 +32,7 @@ public record JogoResponse(
                 jogo.getJogoSaga(),
                 jogo.getJogoClassificacao(),
                 jogo.getJogoEstoque().getId(),
-                jogo.getJogoPlataforma());
+                jogo.getJogoPlataforma(),jogo.getJogoImagem());
     }
 
     public static List<JogoResponse> valueOf1(PanacheQuery<Jogo> jogo) {
@@ -45,7 +46,8 @@ public record JogoResponse(
                         e.getJogoSaga(),
                         e.getJogoClassificacao(),
                         e.getJogoEstoque().getId(),
-                        e.getJogoPlataforma()))
+                        e.getJogoPlataforma(),
+                        e.getJogoImagem()))
                 .toList();
     }
 

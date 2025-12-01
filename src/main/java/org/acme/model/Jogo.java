@@ -27,6 +27,9 @@ public class Jogo extends DefaultEntity {
     @JoinColumn(name = "Jogo_saga")
     private Saga jogoSaga;
 
+
+    private List<String> jogoImagem;
+
     @ManyToOne
     @JoinColumn(name = "jogoClassificacao_id", nullable = false)
     private Classificacao jogoClassificacao;
@@ -38,16 +41,13 @@ public class Jogo extends DefaultEntity {
     @ManyToOne
     @JoinColumn(name = "jogoMidia_id", nullable = false)
     private Midia jogoMidia;
-    
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinTable( name = "jogo_plataforma",                                  // nome da tabela de junção
-        joinColumns = @JoinColumn(name = "jogo_id"),              // FK para Jogo
-        inverseJoinColumns = @JoinColumn(name = "plataforma_id")
-        )
+
+    @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+    @JoinTable(name = "jogo_plataforma", // nome da tabela de junção
+            joinColumns = @JoinColumn(name = "jogo_id"), // FK para Jogo
+            inverseJoinColumns = @JoinColumn(name = "plataforma_id"))
     private List<Plataforma> jogoPlataforma;
 
-
-    
     public Midia getJogoMidia() {
         return jogoMidia;
     }
@@ -112,6 +112,14 @@ public class Jogo extends DefaultEntity {
         this.jogoPlataforma = jogoPlataforma;
     }
 
-   
+    public List<String> getJogoImagem() {
+        return jogoImagem;
+    }
+
+    public void setJogoImagem(List<String> jogoImagem) {
+        this.jogoImagem = jogoImagem;
+    }
+
+ 
 
 }
