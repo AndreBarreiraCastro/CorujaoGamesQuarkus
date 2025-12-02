@@ -5,6 +5,7 @@ import java.util.List;
 import org.acme.dto.PessoaResponse;
 import org.acme.dto.Pessoadto;
 import org.acme.model.Pessoa;
+import org.acme.repository.Enderecorepository;
 import org.acme.repository.Pessoarepository;
 
 import io.quarkus.hibernate.orm.panache.PanacheQuery;
@@ -16,6 +17,8 @@ public class Pessoaimpl implements Pessoaservice {
 
     @Inject
     Pessoarepository repository;
+    @Inject
+    Enderecorepository endereco;
 
     @Override
     public PessoaResponse inserir(Pessoadto pessoa) {
@@ -28,6 +31,7 @@ public class Pessoaimpl implements Pessoaservice {
         novo.setUsername(pessoa.getUsername());
         novo.setSenha(pessoa.getSenha());
         novo.setTelefone(pessoa.getTelefone());
+        novo.setEnderecoPessoa(endereco.findById(pessoa.getEnderecoPessoa()));
         repository.persist(novo);
         return PessoaResponse.valueOf(novo);
     }
@@ -41,6 +45,7 @@ public class Pessoaimpl implements Pessoaservice {
         atualizado.setUsername(pessoa.getUsername());
         atualizado.setSenha(pessoa.getSenha());
         atualizado.setTelefone(pessoa.getTelefone());
+        atualizado.setEnderecoPessoa(endereco.findById(pessoa.getEnderecoPessoa()));
         repository.persist(atualizado);
     }
 

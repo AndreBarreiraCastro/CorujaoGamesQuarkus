@@ -1,7 +1,5 @@
 package org.acme.dto;
 
-import org.acme.model.Endereco;
-
 import jakarta.validation.constraints.NotNull;
 
 public class Pessoadto {
@@ -19,7 +17,7 @@ public class Pessoadto {
     private String telefone;
 
     @NotNull(message = "O nome deve ser informado (back).")
-    private Endereco enderecoPessoa;
+    private Long enderecoPessoa;
 
     @NotNull(message = "O nome deve ser informado (back).")
     private String username;
@@ -59,13 +57,6 @@ public class Pessoadto {
         this.telefone = telefone;
     }
 
-    public Endereco getEnderecoPessoa() {
-        return enderecoPessoa;
-    }
-
-    public void setEnderecoPessoa(Endereco enderecoPessoa) {
-        this.enderecoPessoa = enderecoPessoa;
-    }
 
     public String getUsername() {
         return username;
@@ -73,6 +64,10 @@ public class Pessoadto {
 
     public String getSenha() {
         return senha;
+    }
+
+    public Long getEnderecoPessoa() {
+        return enderecoPessoa;
     }
 
  

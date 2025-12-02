@@ -2,6 +2,8 @@ package org.acme.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 
 @Entity
 public class Pessoa extends  Usuario{
@@ -14,7 +16,8 @@ public class Pessoa extends  Usuario{
     private String cpf;
     @Column(length = 60, nullable = false)
     private String telefone;
-    @Column(length = 60, nullable = false)
+    @OneToOne
+    @JoinColumn(name="enderecoPessoa_id",nullable= false)
     private Endereco enderecoPessoa;
 
     public String getNome() {

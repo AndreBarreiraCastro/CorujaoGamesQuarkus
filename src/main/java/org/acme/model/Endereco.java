@@ -2,6 +2,7 @@ package org.acme.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
 @Entity
@@ -13,8 +14,8 @@ public class Endereco extends DefaultEntity {
     private String numero;
     @Column(length = 60, nullable = false)
     private String cep;
-    @Column(length = 60, nullable = false)
     @ManyToOne
+    @JoinColumn(name="enderecoMunicipio_id",nullable= false)
     private Municipio enderecoMunicipio;
 
     public String getLogradouro() {
@@ -48,5 +49,7 @@ public class Endereco extends DefaultEntity {
     public void setEnderecoMunicipio(Municipio enderecoMunicipio) {
         this.enderecoMunicipio = enderecoMunicipio;
     }
+
+
 
 }
