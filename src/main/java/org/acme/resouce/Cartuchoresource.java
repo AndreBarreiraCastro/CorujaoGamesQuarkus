@@ -8,6 +8,7 @@ import org.acme.model.Cartucho;
 import org.acme.repository.Cartuchorepository;
 import org.acme.service.Cartuchoservice;
 
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.Consumes;
@@ -45,6 +46,7 @@ public class Cartuchoresource {
 
     @POST
     @Transactional
+    @RolesAllowed({"Adm"})
     public Response create(Cartuchodto dto) {
         service.inserir(dto);
         return Response.status(Response.Status.CREATED).build();

@@ -25,6 +25,8 @@ public class Pessoadto {
     @NotNull(message = "O nome deve ser informado (back).")
     private String senha;
 
+    private int perfil;
+
     public String getNome() {
         return nome;
     }
@@ -68,6 +70,14 @@ public class Pessoadto {
 
     public Long getEnderecoPessoa() {
         return enderecoPessoa;
+    }
+
+    public int getPerfil() {
+        return perfil;
+    }
+
+    public void setPerfil(int perfil) {
+        this.perfil = perfil;
     }
 
  

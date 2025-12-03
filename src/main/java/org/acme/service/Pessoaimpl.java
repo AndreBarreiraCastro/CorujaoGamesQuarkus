@@ -4,9 +4,12 @@ import java.util.List;
 
 import org.acme.dto.PessoaResponse;
 import org.acme.dto.Pessoadto;
+import org.acme.model.Perfil;
 import org.acme.model.Pessoa;
+import org.acme.model.Usuario;
 import org.acme.repository.Enderecorepository;
 import org.acme.repository.Pessoarepository;
+import org.acme.repository.Usuariorepository;
 
 import io.quarkus.hibernate.orm.panache.PanacheQuery;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -19,18 +22,23 @@ public class Pessoaimpl implements Pessoaservice {
     Pessoarepository repository;
     @Inject
     Enderecorepository endereco;
+    @Inject
+    Usuariorepository usuario;
+    @Inject
+    Hashservice hash;
 
     @Override
     public PessoaResponse inserir(Pessoadto pessoa) {
-        
+
         validarDados(pessoa, null);
         Pessoa novo = new Pessoa();
         novo.setNome(pessoa.getNome());
         novo.setSobrenome(pessoa.getSobrenome());
         novo.setCpf(pessoa.getCpf());
         novo.setUsername(pessoa.getUsername());
-        novo.setSenha(pessoa.getSenha());
+        novo.setSenha(hash.getHashSenha( pessoa.getSenha()));
         novo.setTelefone(pessoa.getTelefone());
+        novo.setPerfil(Perfil.valueOf(pessoa.getPerfil()));
         novo.setEnderecoPessoa(endereco.findById(pessoa.getEnderecoPessoa()));
         repository.persist(novo);
         return PessoaResponse.valueOf(novo);
@@ -43,8 +51,9 @@ public class Pessoaimpl implements Pessoaservice {
         atualizado.setSobrenome(pessoa.getSobrenome());
         atualizado.setCpf(pessoa.getCpf());
         atualizado.setUsername(pessoa.getUsername());
-        atualizado.setSenha(pessoa.getSenha());
+        atualizado.setSenha(hash.getHashSenha( pessoa.getSenha()));
         atualizado.setTelefone(pessoa.getTelefone());
+        atualizado.setPerfil(Perfil.valueOf(pessoa.getPerfil()));
         atualizado.setEnderecoPessoa(endereco.findById(pessoa.getEnderecoPessoa()));
         repository.persist(atualizado);
     }
@@ -60,11 +69,13 @@ public class Pessoaimpl implements Pessoaservice {
         return PessoaResponse.valueOf(achado);
     }
 
-  /*   @Override
-    public PessoaResponse procura_nome(String nome) {
-        Pessoa achado = repository.acharPorNome(nome);
-        return PessoaResponse.valueOf(achado);
-    } */
+    /*
+     * @Override
+     * public PessoaResponse procura_nome(String nome) {
+     * Pessoa achado = repository.acharPorNome(nome);
+     * return PessoaResponse.valueOf(achado);
+     * }
+     */
 
     @Override
     public List<Pessoa> procura_todos(Integer page, Integer pageSize) {
@@ -84,7 +95,15 @@ public class Pessoaimpl implements Pessoaservice {
 
     }
 
-            private void validarDados(Pessoadto dto, Long id) {
-        
+    private void validarDados(Pessoadto dto, Long id) {
+
     }
+
+    @Override
+    public Usuario findByLoginAndSenha(String login, String senha) {
+     Usuario pessoa = usuario.findByUsernameAndSenha(login, senha);
+        return pessoa;
+    }
+
+
 }

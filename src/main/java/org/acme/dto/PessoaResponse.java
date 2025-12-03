@@ -15,7 +15,7 @@ public record PessoaResponse(
         String telefone,
         Endereco enderecoPessoa,
         String username,
-        String senha) {
+        String perfil) {
 
     public static PessoaResponse valueOf(Pessoa pessoa) {
         return new PessoaResponse(
@@ -26,21 +26,21 @@ public record PessoaResponse(
                 pessoa.getTelefone(),
                 pessoa.getEnderecoPessoa(),
                 pessoa.getUsername(),
-                pessoa.getSenha()
+                pessoa.getPerfil().getLabel()
         );
-    }
+}
 
-    public static List<PessoaResponse> valueOf1(PanacheQuery<Pessoa> jogo) {
+public static List<PessoaResponse> valueOf1(PanacheQuery<Pessoa> jogo) {
         return jogo.stream()
-                .map(e -> new PessoaResponse(
-                        e.getId(),
-                        e.getNome(),
-                        e.getSobrenome(),
-                        e.getCpf(),
-                        e.getTelefone(),
-                        e.getEnderecoPessoa(),
-                        e.getUsername(),
-                        e.getSenha()))
+        .map(e -> new PessoaResponse(
+                e.getId(),
+                e.getNome(),
+                e.getSobrenome(),
+                e.getCpf(),
+                e.getTelefone(),
+                e.getEnderecoPessoa(),
+                e.getUsername(),
+                e.getPerfil().getLabel()))
                 .toList();
     }
 

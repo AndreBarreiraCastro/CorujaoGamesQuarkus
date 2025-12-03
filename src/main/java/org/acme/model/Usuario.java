@@ -11,8 +11,9 @@ public abstract class Usuario extends DefaultEntity {
 
     @Column(length = 60, nullable = false)
     private String username;
-    @Column(length = 60, nullable = false)
     private String senha;
+    @Column(length = 60, nullable = false)
+    private Perfil perfil;
 
     public String getUsername() {
         return username;
@@ -28,6 +29,14 @@ public abstract class Usuario extends DefaultEntity {
 
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+
+    public Perfil getPerfil() {
+        return perfil;
+    }
+
+    public void setPerfil(Perfil perfil) {
+        this.perfil = perfil;
     }
 
 }
