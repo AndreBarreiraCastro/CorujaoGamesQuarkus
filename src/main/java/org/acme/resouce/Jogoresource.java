@@ -6,6 +6,7 @@ import org.acme.dto.JogoResponse;
 import org.acme.dto.Jogodto;
 import org.acme.service.Jogoservice;
 
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.Consumes;
@@ -23,7 +24,7 @@ import jakarta.ws.rs.core.MediaType;
 @Path("Jogo")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-
+//@Authenticated
 public class Jogoresource {
 
     @Inject
@@ -32,6 +33,7 @@ public class Jogoresource {
      @POST
     @Transactional
     @Path("/criar")
+    @RolesAllowed({"Adm"})
     public JogoResponse inserir(Jogodto jogo) {
         return service.inserir(jogo);
     }
@@ -39,6 +41,7 @@ public class Jogoresource {
     @PUT
     @Transactional
     @Path("/alterar/{id}")
+    @RolesAllowed({"Adm"})
     public void atualizar(@PathParam("id") Long id, Jogodto jogo) {
 
         service.atualizar(id, jogo);
@@ -46,6 +49,7 @@ public class Jogoresource {
 
     @DELETE
     @Path("/{id}")
+    @RolesAllowed({"Adm"})
     @Transactional
     public void deletar(@PathParam("id") Long id) {
         service.deletar(id);
@@ -53,6 +57,7 @@ public class Jogoresource {
 
     @GET
     @Path("id/{id}")
+    @RolesAllowed({"Adm"})
     public JogoResponse procuraid(@PathParam("id") Long id) {
         return service.procura_id(id);
     }
@@ -68,13 +73,15 @@ public class Jogoresource {
 
     @GET
     @Path("procuratodos")
+    //@RolesAllowed({"Adm","User"})
     public List<JogoResponse> procuratodos(@QueryParam("page") @DefaultValue("0") int page,
-            @QueryParam("pageSize") @DefaultValue("100") int pageSize) {
+    @QueryParam("pageSize") @DefaultValue("100") int pageSize) {
         return service.procura_todos(page, pageSize);
     }
-
+    
     @GET
     @Path("count")
+    //@RolesAllowed({"Adm","User"})
     public Long count() {
         return service.count();
     }

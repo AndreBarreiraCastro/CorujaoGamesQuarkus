@@ -24,6 +24,7 @@ import jakarta.ws.rs.core.MediaType;
 @Path("Pessoa")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
+//@Authenticated
 public class Pessoaresource {
     
 @Inject
@@ -31,6 +32,7 @@ Pessoaservice service;
 
     @POST
     @Transactional
+    
     public PessoaResponse inserir(Pessoadto pessoa){
         return service.inserir(pessoa);
     }
@@ -39,39 +41,44 @@ Pessoaservice service;
     @Transactional
     @Path("/{id}")
     public void  atualizar(@PathParam("id") Long id,Pessoadto pessoa){
-
-       service.atualizar(id, pessoa);
+        
+        service.atualizar(id, pessoa);
     }
-
+    
     @DELETE
     @Path("/{id}")
+  //  @RolesAllowed({"Adm"})
     @Transactional
     public void deletar(@PathParam("id") Long id){
         service.deletar(id);
+        
     }
-
+    
     @GET
     @Path("id/{id}")
+  //  @RolesAllowed({"Adm"})
     public PessoaResponse procuraid(@PathParam("id") Long id){
         return service.procura_id(id);
     }
-
-  /*   @GET
+    
+    /*   @GET
     @Path("/nome/{nome}")
     public PessoaResponse procuranome(@PathParam("nome") String nome){
         return service.procura_nome(nome);
-    } */
-    
-    
-    @GET
-    @Path("/procuratodos")
-    public List<Pessoa> procuratodos(@QueryParam("page") @DefaultValue("0") int page,
-    @QueryParam("pageSize") @DefaultValue("100") int pageSize) { 
-        return service.procura_todos(page, pageSize);
-    }
-    
-    @GET
-    @Path("/count")
+        } */
+       
+       
+       @GET
+       @Path("/procuratodos")
+  //     @RolesAllowed({"Adm"})
+       public List<Pessoa> procuratodos(@QueryParam("page") @DefaultValue("0") int page,
+       @QueryParam("pageSize") @DefaultValue("100") int pageSize) { 
+           return service.procura_todos(page, pageSize);
+        }
+        
+        @GET
+        @Path("/count")
+   //     @RolesAllowed({"Adm"})
     public Long count() { 
         return service.count();
     }

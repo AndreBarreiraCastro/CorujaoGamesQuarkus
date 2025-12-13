@@ -7,6 +7,8 @@ import org.acme.dto.Colecaodto;
 import org.acme.model.Colecao;
 import org.acme.service.Colecaoservice;
 
+import io.quarkus.security.Authenticated;
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.Consumes;
@@ -24,6 +26,7 @@ import jakarta.ws.rs.core.MediaType;
 @Path("Colecao")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
+@Authenticated
 public class Colecaoresource {
 
     @Inject
@@ -31,6 +34,7 @@ public class Colecaoresource {
 
     @POST
     @Transactional
+    @RolesAllowed({"Adm"})
     public ColecaoResponse inserir(Colecaodto colecao){
         return service.inserir(colecao);
     }
@@ -38,40 +42,46 @@ public class Colecaoresource {
     @PUT
     @Transactional
     @Path("/{id}")
+    @RolesAllowed({"Adm"})
     public void  atualizar(@PathParam("id") Long id,Colecaodto colecao){
-
-       service.atualizar(id, colecao);
+        
+        service.atualizar(id, colecao);
     }
-
+    
     
     @DELETE
     @Path("/{id}")
     @Transactional
+    @RolesAllowed({"Adm"})
     public void deletar(@PathParam("id") Long id){
         service.deletar(id);
     }
-
+    
     @GET
     @Path("id/{id}")
+    @RolesAllowed({"Adm"})
     public ColecaoResponse procuraid(@PathParam("id") Long id){
         return service.procura_id(id);
     }
-
+    
     @GET
     @Path("/nome/{nome}")
+    @RolesAllowed({"Adm"})
     public ColecaoResponse procuranome(@PathParam("nome") String nome){
         return service.procura_nome(nome);
     }
-
+    
     @GET
     @Path("/procuratodos")
+    @RolesAllowed({"Adm"})
     public List<Colecao> procuratodos(@QueryParam("page") @DefaultValue("0") int page,
-                                    @QueryParam("pageSize") @DefaultValue("100") int pageSize) { 
+    @QueryParam("pageSize") @DefaultValue("100") int pageSize) { 
         return service.procura_todos(page, pageSize);
     }
     
     @GET
     @Path("/count")
+    @RolesAllowed({"Adm"})
     public Long count() { 
         return service.count();
     }

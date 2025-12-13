@@ -24,6 +24,7 @@ import jakarta.ws.rs.core.MediaType;
 @Path("Endereco")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
+//@Authenticated
 public class Enderecoresource {
     
 @Inject
@@ -31,47 +32,53 @@ Enderecoservice service;
 
     @POST
     @Transactional
+  //  @RolesAllowed({"Adm","User"})
     public EnderecoResponse inserir(Enderecodto endereco){
         return service.inserir(endereco);
     }
     
     @PUT
     @Transactional
+  //  @RolesAllowed({"Adm","User"})
     @Path("/{id}")
     public void  atualizar(@PathParam("id") Long id,Enderecodto endereco){
-
-       service.atualizar(id, endereco);
+        
+        service.atualizar(id, endereco);
     }
-
+    
     @DELETE
     @Path("/{id}")
+  //  @RolesAllowed({"Adm","User"})
     @Transactional
     public void deletar(@PathParam("id") Long id){
         service.deletar(id);
     }
-
+    
     @GET
     @Path("id/{id}")
+   // @RolesAllowed({"Adm","User"})
     public EnderecoResponse procuraid(@PathParam("id") Long id){
         return service.procura_id(id);
     }
-
-  /*   @GET
+    
+    /*   @GET
     @Path("/nome/{nome}")
     public EnderecoResponse procuranome(@PathParam("nome") String nome){
         return service.procura_nome(nome);
-    } */
-    
-    
-    @GET
-    @Path("/procuratodos")
-    public List<Endereco> procuratodos(@QueryParam("page") @DefaultValue("0") int page,
-    @QueryParam("pageSize") @DefaultValue("100") int pageSize) { 
-        return service.procura_todos(page, pageSize);
-    }
-    
-    @GET
-    @Path("/count")
+        } */
+       
+       
+       @GET
+       @Path("/procuratodos")
+    //   @RolesAllowed({"Adm","User"})
+       public List<Endereco> procuratodos(@QueryParam("page") @DefaultValue("0") int page,
+       @QueryParam("pageSize") @DefaultValue("100") int pageSize) { 
+           return service.procura_todos(page, pageSize);
+        }
+        
+        @GET
+        @Path("/count")
+    //    @RolesAllowed({"Adm","User"})
     public Long count() { 
         return service.count();
     }

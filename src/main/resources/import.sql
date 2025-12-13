@@ -485,3 +485,10 @@ INSERT INTO endereco(logradouro,numero,cep,enderecoMunicipio_id) VALUES('Rua do 
 INSERT INTO endereco(logradouro,numero,cep,enderecoMunicipio_id) VALUES('Rua Caruaru','81','55000000',28);
 INSERT INTO endereco(logradouro,numero,cep,enderecoMunicipio_id) VALUES('Rua Ceará','59','60000000',29);
 INSERT INTO endereco(logradouro,numero,cep,enderecoMunicipio_id) VALUES('Av Padre Cícero','18','63000000',30);
+
+-- =========================
+-- TABELA: MEIO_PAGAMENTO
+-- =========================
+INSERT INTO meioPagamento (nome) VALUES ('Cartão de Crédito');
+INSERT INTO meioPagamento (nome) VALUES ('Cartão de Débito');
+INSERT INTO meioPagamento (nome) VALUES ('Pix');

@@ -8,6 +8,7 @@ import org.acme.model.Cartucho;
 import org.acme.repository.Cartuchorepository;
 import org.acme.service.Cartuchoservice;
 
+import io.quarkus.security.Authenticated;
 import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
@@ -27,6 +28,7 @@ import jakarta.ws.rs.core.Response;
 @Path("/cartuchos")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
+@Authenticated
 public class Cartuchoresource {
 
     @Inject
@@ -51,30 +53,34 @@ public class Cartuchoresource {
         service.inserir(dto);
         return Response.status(Response.Status.CREATED).build();
     }
-
+    
     @PUT
     @Transactional
     @Path("/{id}")
+    @RolesAllowed({"Adm"})
     public void atualizar(@PathParam("id") Long id, Cartuchodto cartucho) {
-
+        
         service.atualizar(id, cartucho);
     }
-
+    
     @DELETE
     @Path("/{id}")
     @Transactional
+    @RolesAllowed({"Adm"})
     public void deletar(@PathParam("id") Long id) {
         service.deletar(id);
     }
-
+    
     @GET
     @Path("id/{id}")
+    @RolesAllowed({"Adm"})
     public CartuchoResponse procuraid(@PathParam("id") Long id) {
         return service.procura_id(id);
     }
-
+    
     @GET
     @Path("procuratodos")
+    @RolesAllowed({"Adm"})
     public List<Cartucho> procuratodos(@QueryParam("page") @DefaultValue("0") int page,
             @QueryParam("pageSize") @DefaultValue("100") int pageSize) {
         return service.procura_todos(page, pageSize);

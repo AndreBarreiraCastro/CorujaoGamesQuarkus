@@ -2,12 +2,11 @@ package org.acme.resouce;
 
 import java.util.List;
 
-import org.acme.dto.DiscoResponse;
-import org.acme.dto.Discodto;
-import org.acme.model.Disco;
-import org.acme.service.Discoservice;
+import org.acme.dto.CarrinhoResponse;
+import org.acme.dto.Carrinhodto;
+import org.acme.model.Carrinho;
+import org.acme.service.Carrinhoservice;
 
-import io.quarkus.security.Authenticated;
 import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
@@ -23,68 +22,57 @@ import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.QueryParam;
 import jakarta.ws.rs.core.MediaType;
 
-@Path("/discos")
+@Path("Carrinho")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-@Authenticated
-public class Discoresource {
+public class Carrinhoresource {
 
     @Inject
-    Discoservice service;
-
-    /*
-     * @GET
-     * public List<Discodto> getAll() {
-     * return repository.listAll() // PanacheEntity
-     * .stream()
-     * .map(this::todto)
-     * .collect(Collectors.toList());
-     * }
-     */
+    Carrinhoservice service;
 
     @POST
     @Transactional
-    @RolesAllowed({"Adm"})
-    public DiscoResponse create(Discodto dto) {
+    public CarrinhoResponse inserir(Carrinhodto dto) {
         return service.inserir(dto);
     }
-    
+
     @PUT
     @Transactional
     @Path("/{id}")
-    @RolesAllowed({"Adm"})
-    public void atualizar(@PathParam("id") Long id, Discodto disco) {
-        
-        service.atualizar(id, disco);
+    public void atualizar(@PathParam("id") Long id, Carrinhodto dto) {
+        service.atualizar(id, dto);
     }
-    
+
     @DELETE
     @Path("/{id}")
     @Transactional
-    @RolesAllowed({"Adm"})
     public void deletar(@PathParam("id") Long id) {
         service.deletar(id);
     }
-    
+
     @GET
     @Path("id/{id}")
-    @RolesAllowed({"Adm"})
-    public DiscoResponse procuraid(@PathParam("id") Long id) {
+    public CarrinhoResponse procuraid(@PathParam("id") Long id) {
         return service.procura_id(id);
     }
-    
+
+    @GET
+    @Path("porUsuario/{usuarioId}")
+    public CarrinhoResponse porUsuario(@PathParam("usuarioId") Long usuarioId) {
+        return service.procura_por_usuario(usuarioId);
+    }
+
     @GET
     @Path("procuratodos")
     @RolesAllowed({"Adm"})
-    public List<Disco> procuratodos(@QueryParam("page") @DefaultValue("0") int page,
-    @QueryParam("pageSize") @DefaultValue("100") int pageSize) {
+    public List<Carrinho> procuratodos(@QueryParam("page") @DefaultValue("0") int page,
+            @QueryParam("pageSize") @DefaultValue("100") int pageSize) {
         return service.procura_todos(page, pageSize);
     }
-    
+
     @GET
     @Path("count")
-   @RolesAllowed({"Adm"})
     public Long count() {
-            return service.count();
-        }
+        return service.count();
+    }
 }

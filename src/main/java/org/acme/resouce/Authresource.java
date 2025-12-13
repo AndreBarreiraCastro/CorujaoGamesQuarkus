@@ -8,6 +8,7 @@ import org.acme.service.Jwtservice;
 import org.acme.service.Pessoaservice;
 
 import jakarta.inject.Inject;
+import jakarta.transaction.Transactional;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
@@ -16,7 +17,7 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.Response.Status;
 
-@Path("/auth")
+@Path("auth")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class Authresource {
@@ -31,9 +32,10 @@ public class Authresource {
     Jwtservice jwtService;
     @Inject
     Usuariorepository repository;
-
+    
     @POST
-    public Response login(Authdto authDTO) {
+    @Transactional
+ public Response login(Authdto authDTO) {
         String hash = hashService.getHashSenha(authDTO.getSenha());
 
         Usuario usuario = repository.findByUsernameAndSenha(authDTO.getLogin(), hash);
@@ -44,8 +46,8 @@ public class Authresource {
         } 
         return Response.ok()
             .header("Authorization", jwtService.generateJwt(usuario))
+            .header("perfil", usuario.getPerfil())
             .build();
-        
     }
   
 }

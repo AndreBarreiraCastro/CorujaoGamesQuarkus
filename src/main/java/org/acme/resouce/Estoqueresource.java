@@ -7,6 +7,8 @@ import org.acme.dto.Estoquedto;
 import org.acme.model.Estoque;
 import org.acme.service.Estoqueservice;
 
+import io.quarkus.security.Authenticated;
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.Consumes;
@@ -24,6 +26,7 @@ import jakarta.ws.rs.core.MediaType;
 @Path("Estoque")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
+@Authenticated
 public class Estoqueresource {
 
     @Inject
@@ -31,41 +34,47 @@ public class Estoqueresource {
 
     @POST
     @Transactional
+    @RolesAllowed({"Adm"})
     public EstoqueResponse inserir(Estoquedto estoque) {
         return service.inserir(estoque);
     }
-
+    
     @PUT
     @Transactional
     @Path("/{id}")
+    @RolesAllowed({"Adm"})
     public void atualizar(@PathParam("id") Long id, Estoquedto estoque) {
-
+        
         service.atualizar(id, estoque);
     }
-
+    
     @DELETE
     @Path("/{id}")
+    @RolesAllowed({"Adm"})
     @Transactional
     public void deletar(@PathParam("id") Long id) {
         service.deletar(id);
     }
-
+    
     @GET
     @Path("id/{id}")
+    @RolesAllowed({"Adm"})
     public EstoqueResponse procuraid(@PathParam("id") Long id) {
         return service.procura_id(id);
     }
     
     @GET
     @Path("procuratodos")
+    @RolesAllowed({"Adm"})
     public List<Estoque> procuratodos(@QueryParam("page") @DefaultValue("0") int page,
     
     @QueryParam("pageSize") @DefaultValue("100") int pageSize) {
         return service.procura_todos(page, pageSize);
     }
     
-        @GET
-        @Path("count")
+    @GET
+    @Path("count")
+    @RolesAllowed({"Adm"})
         public Long count() {
             return service.count();
         }
